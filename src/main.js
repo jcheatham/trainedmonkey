@@ -19,6 +19,7 @@ var trainedmonkey = (function() {
 
     result.monkeySprite = phaser.add.sprite(phaser.world.centerX, phaser.world.centerY, 'monkey');
     result.monkeySprite.anchor.setTo(0.5, 0.5);
+    result.monkeySprite.z = 0;
     result.monkeySprite.scale = new PIXI.Point(0.1, 0.1);
 
     result.time = 60;
@@ -33,6 +34,8 @@ var trainedmonkey = (function() {
     _.each(items, function(item){
       item.init(phaser);
     });
+
+    phaser.world.sort('z', Phaser.Group.SORT_ASCENDING);
   }
 
   result.update = function() {
@@ -53,7 +56,6 @@ var trainedmonkey = (function() {
     if(phaser.input.keyboard.isDown(37)) {
       result.jumpSound.play();
     }
-
   }
 
   return result;
