@@ -11,8 +11,12 @@ var trainedmonkey = (function() {
     phaser.load.audio('jump', 'audio/train0.wav');
     // loadImage('item', 'img/item.png');
     // loadImage('train', 'img/train.png');
+
+    _.each(items, function(item){
+      item.preload(phaser);
+    });
   }
-//
+
   result.init = function() {
 
     result.monkeySprite = phaser.add.sprite(phaser.world.centerX, phaser.world.centerY, 'monkey');
@@ -23,7 +27,9 @@ var trainedmonkey = (function() {
 
     result.jumpSound = phaser.add.audio('jump');
 
-
+    _.each(items, function(item){
+      item.init(phaser);
+    });
   }
 
   result.update = function() {
