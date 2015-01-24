@@ -7,21 +7,21 @@ var trainedmonkey = (function() {
 
     // monkey.loadAssets();
 
-    game.load.image('monkey', 'img/monkey.png');
-    game.load.audio('jump', 'audio/train0.wav');  
+    phaser.load.image('monkey', 'img/monkey.png');
+    phaser.load.audio('jump', 'audio/train0.wav');
     // loadImage('item', 'img/item.png');
     // loadImage('train', 'img/train.png');
   }
-// 
+//
   result.init = function() {
 
-    result.monkeySprite = game.add.sprite(game.world.centerX, game.world.centerY, 'monkey');
+    result.monkeySprite = phaser.add.sprite(phaser.world.centerX, phaser.world.centerY, 'monkey');
     result.monkeySprite.anchor.setTo(0.5, 0.5);
 
     result.time = 60;
-    result.clock = game.add.text(game.world.centerX, game.world.centerY + 200, result.time.toString());
+    result.clock = phaser.add.text(phaser.world.centerX, phaser.world.centerY + 200, result.time.toString());
 
-    result.jumpSound = game.add.audio('jump');  
+    result.jumpSound = phaser.add.audio('jump');
 
 
   }
@@ -31,7 +31,7 @@ var trainedmonkey = (function() {
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
 
-    if(game.input.keyboard.isDown(39)) {  
+    if(phaser.input.keyboard.isDown(39)) {
       result.monkeySprite.x -= 1;
     } else {
       result.monkeySprite.x += 1;
@@ -41,10 +41,10 @@ var trainedmonkey = (function() {
     //   result.jumpSound.play();
     // }
 
-    if(game.input.keyboard.isDown(37)) {
+    if(phaser.input.keyboard.isDown(37)) {
       result.jumpSound.play();
     }
-  
+
   }
 
   return result;

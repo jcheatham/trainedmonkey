@@ -19,11 +19,11 @@
 
     <script type="text/javascript">
 
-    var game = {};
+    var phaser = {};
 
     window.onload = function() {
 
-        game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        phaser = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
  
         function preload () {
             trainedmonkey.loadAssets();
