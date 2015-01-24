@@ -8,15 +8,8 @@
     </head>
     <body>
 
-
-
     <script src="src/main.js"></script>
     <script src="src/items.js"></script>
-
-    <!-- // <script src="src/car.js"></script> -->
-    <!-- // <script src="src/player.js"></script> -->
-    <!-- // <script src="src/item.js"></script> -->
-
 
     <script type="text/javascript">
 
@@ -24,7 +17,7 @@
 
     window.onload = function() {
 
-        phaser = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        phaser = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
  
         function preload () {
             trainedmonkey.loadAssets();
@@ -38,7 +31,11 @@
             trainedmonkey.update();
         }
 
-
+        function render() {
+            phaser.debug.cameraInfo(phaser.camera, 32, 32);
+            phaser.debug.spriteCoords(trainedmonkey.monkeySprite, 32, 500);
+            phaser.debug.spriteCoords(items.key.sprite, 400, 500);
+        }
 
     };
 
