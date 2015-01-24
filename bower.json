@@ -1,0 +1,20 @@
+{
+  "name": "trainedmonkey",
+  "version": "0.0.0",
+  "homepage": "https://github.com/goldsmsj/trainedmonkey",
+  "authors": [
+    "Steve Goldsmith <steve@thisisstevegoldsmith.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.7.0"
+  }
+}
