@@ -57,6 +57,8 @@ var game = (function() {
     _.each(items, function(item){
       if (item.init) item.init(phaser);
       item.attachedToTrain = true;
+      item.falling = false;
+
 
     });
 
@@ -110,7 +112,9 @@ var game = (function() {
 
     _.each(items, function(item) {
       if(item.attachedToTrain) {
-        game.followTrain(item);
+        game.followTrain(item);  
+      } else if(item.falling){
+        game.applyGravity(item);
       }
     })
 
@@ -122,16 +126,6 @@ var game = (function() {
 
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
-
-    // if(phaser.input.keyboard.isDown(39)) {
-    //   result.monkeySprite.x -= 1;
-    // } else {
-    //   result.monkeySprite.x += 1;
-    // }
-
-    // if(_.random(1000) < 3) {
-    //   result.jumpSound.play();
-    // }
 
     var wantInteraction = false;
     if (phaser.input.keyboard.isDown(32)) {
@@ -176,7 +170,8 @@ var game = (function() {
 
   result.dropItem = function() {
     console.log("dropItem");
-    result.currentItem.attachedToTrain = true;
+    result.currentItem.falling = true;
+    result.currentItem.attachedToTrain = false;
     result.currentItem = items.empty;
     result.monkey.attachItem(result.currentItem);
   }
@@ -198,6 +193,24 @@ var game = (function() {
     item.attachedToTrain = false;
   }
 
+
+  result.applyGravity = function(item) {
+    var gravity = 0.1;
+
+    if(item.sprite === undefined) return;
+    if(item.velocityY === undefined) item.velocityY = 0;
+
+    item.velocityY += gravity;
+    item.sprite.y += item.velocityY;
+
+    if(item.sprite.y > game.monkey.groundHeight) {
+      item.falling = false;
+      item.attachedToTrain = true;
+    }
+
+    item.sprite.x += game.trainMotionOffsetX;
+    item.sprite.y += game.trainMotionOffsetY;
+  }
 
   result.followTrain = function(item) {
     if(item.sprite === undefined) return;
