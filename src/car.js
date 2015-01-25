@@ -27,14 +27,10 @@ Car.prototype.update = function(game) {
 Car.prototype.loadAssets = function() {
   phaser.load.image('train.engine.background', 'img/game_rdy_PNGs/engine_room.png');
   phaser.load.image('train.engine.foreground', 'img/game_rdy_PNGs/foreground_layer.png');
+  phaser.load.image('train.steam.background', 'img/game_rdy_PNGs/steam_switch_room_bg.png');
+  phaser.load.image('train.steam.foreground', 'img/game_rdy_PNGs/steam_switch_room_foreground.png');
+  phaser.load.image('train.gumball.background', 'img/game_rdy_PNGs/gumball_room_bg.png');
+  phaser.load.image('train.gumball.foreground', 'img/game_rdy_PNGs/gumball_room_foreground.png');
 };
-
-Car.prototype.cars = [];
-
-Car.prototype.add = function(car){
-  this.cars.push(car);
-  return this;
-};
-
 
 

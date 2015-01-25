@@ -161,6 +161,10 @@ Monkey.prototype.update = function(game) {
     this.sprite.setTexture(PIXI.TextureCache["monkey.jump"])
   }
 
+  this.collisionRect = new Phaser.Rectangle(this.interactRect.x + this.sprite.x,
+      this.interactRect.y + this.sprite.y,
+      this.interactRect.width,
+      this.interactRect.height);
 }
 
 

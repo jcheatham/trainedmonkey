@@ -1,5 +1,8 @@
 var game = (function() {
-  var result = {};
+  var result = {
+    interactions: {},
+    collisionHandlers: {}
+  };
 
   result.loadAssets = function () {
 
@@ -7,7 +10,7 @@ var game = (function() {
     Car.prototype.loadAssets();
     // monkey.loadAssets();
 
- 
+
     // phaser.load.image('monkey', 'img/monkey.png');
     phaser.load.audio('jump', 'audio/train0.wav');
     // loadImage('item', 'img/item.png');
@@ -20,12 +23,24 @@ var game = (function() {
 
   result.init = function() {
     result.monkey = new Monkey();
-    result.train = new Car('train.engine.background', 'train.engine.foreground', phaser.world.centerX, phaser.world.centerY);
-    result.train.add(result.train).add(result.train);
-    console.log(result.train.cars);
+
+    result.trains = [];
+
+    var trainNames = ['gumball', 'steam', 'engine'];
+
+    _.each(trainNames, function(name) {
+      result.trains.push(
+        new Car('train.' + name + '.background', 'train.' + name + '.foreground', 
+                500 + 1100 * trainNames.indexOf(name), phaser.world.centerY)
+      );
+    });
+
+
+
+
     background.init();
 
-    // result.trainSpritePlaceholder = 
+    // result.trainSpritePlaceholder =
 
     result.time = 60;
     result.clock = phaser.add.text(phaser.world.centerX, phaser.world.centerY + 200, result.time.toString());
@@ -33,8 +48,8 @@ var game = (function() {
     result.jumpSound = phaser.add.audio('jump');
 
     //phaser.camera.deadzone = new Phaser.Rectangle(200,380,1,1);
-    phaser.world.setBounds(0,0,2000,1000);
-    phaser.camera.follow(result.monkeySprite);
+    phaser.world.setBounds(0,0,200000,1000);
+    // phaser.camera.follow(result.monkeySprite);
 
     _.each(items, function(item){
       if (item.init) item.init(phaser);
@@ -46,13 +61,47 @@ var game = (function() {
     result.canUseItem = true;
   }
 
+  result.handleDoors = function() {
+    _.each(result.trains, function(car) {
+      var i = result.trains.indexOf(car);
+
+      start = i * 1100;
+
+      //Right door of car
+      if(result.monkey.sprite.x > start + 950 && result.monkey.sprite.x < start + 1000) {
+        phaser.camera.x = start + 1100;
+        result.monkey.sprite.x = start + 1200;
+      }
+
+      //Left door of car
+      if(result.monkey.sprite.x > start + 0 && result.monkey.sprite.x < start + 50) {
+        phaser.camera.x = start - 1100;
+        result.monkey.sprite.x = start - 200;
+      }
+      
+    })
+  }
+
+
   result.update = function() {
+
+    // if(phaser.input.keyboard.isDown(81)) {
+    //   phaser.camera.x += 10;
+    // }
+
+    result.handleDoors();
+
+
+
 
     result.trainMotionOffsetX = 0.3 * Math.sin(2 * phaser.time.totalElapsedSeconds());
     result.trainMotionOffsetY = 0.1 * Math.sin(3 * phaser.time.totalElapsedSeconds());
 
     result.monkey.update(result);
-    result.train.update(result);
+    
+    _.each(result.trains, function(car) {
+      car.update(result);
+    }) 
 
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
@@ -67,34 +116,44 @@ var game = (function() {
     //   result.jumpSound.play();
     // }
 
+    var wantInteraction = false;
     if (phaser.input.keyboard.isDown(32)) {
       if (result.canUseItem) {
         result.canUseItem = false;
-
-        var monkeyRect = new Phaser.Rectangle(result.monkey.interactRect.x + result.monkey.sprite.x,
-            result.monkey.interactRect.y + result.monkey.sprite.y,
-            result.monkey.interactRect.width,
-            result.monkey.interactRect.height);
-        var itemRect = new Phaser.Rectangle();
-
-        if (!_.some(items, function(item) {
-          if (!item.sprite || item == result.currentItem) { return false; }
-          itemRect.x = item.interactRect.x + item.sprite.x;
-          itemRect.y = item.interactRect.y + item.sprite.y;
-          itemRect.width = item.interactRect.width;
-          itemRect.height = item.interactRect.height;
-          if (monkeyRect.intersects(itemRect)) { result.interact(item); return true; }
-        })) {
-          result.interact(items.empty);
-        }
+        wantInteraction = true;
       }
     } else {
       result.canUseItem = true;
     }
-  }
 
-  result.interact = function(item) {
-    (result.currentItem.interactions[item.name] || result.currentItem.interactions["default"])(item);
+    var collides = false;
+    _.each(items, function(item) {
+      if (item.update) { item.update(phaser); }
+      if (item.interactRect) {
+        item.collisionRect = new Phaser.Rectangle(item.interactRect.x + item.sprite.x,
+          item.interactRect.y + item.sprite.y, item.interactRect.width, item.interactRect.height);
+      }
+      if (!item.collisionRect) { return; }
+
+      collides = (result.currentItem != item) && result.monkey.collisionRect.intersects(item.collisionRect);
+
+      if (collides && result.collisionHandlers[item.name]) {
+        result.collisionHandlers[item.name]();
+      }
+
+      if (collides && wantInteraction) {
+        wantInteraction = false;
+        if (!result.interactions[result.currentItem.name] || !result.interactions[result.currentItem.name][item.name]) {
+          console.log("FAILURE", result.currentItem.name, item.name);
+          return;
+        }
+        result.interactions[result.currentItem.name][item.name]();
+      }
+    });
+
+    if (wantInteraction) {
+      result.interactions[result.currentItem.name]["empty"]();
+    }
   }
 
   result.dropItem = function() {
@@ -113,8 +172,9 @@ var game = (function() {
 
   result.acquireItem = function(item) {
     console.log("acquireItem ",item);
-    if (result.currentItem != items.empty) { console.log("WARNING: acquiring item while currentItem != empty"); }
-    result.currentItem = item;
+    if (!items[item]) { console.log("unknown item: ",item); return; }
+    //if (result.currentItem != items.empty) { console.log("WARNING: acquiring item while currentItem != empty"); }
+    result.currentItem = items[item];
     result.monkey.attachItem(result.currentItem);
   }
 
