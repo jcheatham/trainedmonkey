@@ -4,7 +4,7 @@ items["activationLever"] = {
     phaser.load.image('activationLever', 'img/activation_lever.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(5750, 310, 'activationLever');
+    this.sprite = phaser.add.sprite(5720, 315, 'activationLever');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 100;
     this.interactRect = new Phaser.Rectangle(-10,-20,20,40);

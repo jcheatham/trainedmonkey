@@ -4,7 +4,7 @@ items["hatrack"] = {
     phaser.load.image('hatrack', 'img/wigrack.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(1880, 280, 'hatrack');
+    this.sprite = phaser.add.sprite(4900, 280, 'hatrack');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 100;
     this.sprite.scale = new PIXI.Point(6, 6);

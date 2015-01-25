@@ -19,8 +19,7 @@ items["owl"] = {
   },
   update: function() {
 
-    this.sprite.x += game.trainMotionOffsetX;
-    this.sprite.y += game.trainMotionOffsetY;
+    game.followTrain(this.sprite);
 
     var headTargetX = this.sprite.x + 4;
     var headTargetY = this.sprite.y - 30;
