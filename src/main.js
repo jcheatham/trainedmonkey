@@ -20,9 +20,21 @@ var game = (function() {
 
   result.init = function() {
     result.monkey = new Monkey();
-    result.train = new Car('train.engine.background', 'train.engine.foreground', phaser.world.centerX, phaser.world.centerY);
-    result.train.add(result.train).add(result.train);
-    console.log(result.train.cars);
+
+    result.trains = [];
+
+    var trainNames = ['gumball', 'steam', 'engine'];
+
+    _.each(trainNames, function(name) {
+      result.trains.push(
+        new Car('train.' + name + '.background', 'train.' + name + '.foreground', 
+                500 + 1100 * trainNames.indexOf(name), phaser.world.centerY)
+      );
+    });
+
+
+
+
     background.init();
 
     // result.trainSpritePlaceholder = 
@@ -33,8 +45,8 @@ var game = (function() {
     result.jumpSound = phaser.add.audio('jump');
 
     //phaser.camera.deadzone = new Phaser.Rectangle(200,380,1,1);
-    phaser.world.setBounds(0,0,2000,1000);
-    phaser.camera.follow(result.monkeySprite);
+    phaser.world.setBounds(0,0,200000,1000);
+    // phaser.camera.follow(result.monkeySprite);
 
     _.each(items, function(item){
       if (item.init) item.init(phaser);
@@ -46,13 +58,47 @@ var game = (function() {
     result.canUseItem = true;
   }
 
+  result.handleDoors = function() {
+    _.each(result.trains, function(car) {
+      var i = result.trains.indexOf(car);
+
+      start = i * 1100;
+
+      //Right door of car
+      if(result.monkey.sprite.x > start + 950 && result.monkey.sprite.x < start + 1000) {
+        phaser.camera.x = start + 1100;
+        result.monkey.sprite.x = start + 1200;
+      }
+
+      //Left door of car
+      if(result.monkey.sprite.x > start + 0 && result.monkey.sprite.x < start + 50) {
+        phaser.camera.x = start - 1100;
+        result.monkey.sprite.x = start - 200;
+      }
+      
+    })
+  }
+
+
   result.update = function() {
+
+    // if(phaser.input.keyboard.isDown(81)) {
+    //   phaser.camera.x += 10;
+    // }
+
+    result.handleDoors();
+
+
+
 
     result.trainMotionOffsetX = 0.3 * Math.sin(2 * phaser.time.totalElapsedSeconds());
     result.trainMotionOffsetY = 0.1 * Math.sin(3 * phaser.time.totalElapsedSeconds());
 
     result.monkey.update(result);
-    result.train.update(result);
+    
+    _.each(result.trains, function(car) {
+      car.update(result);
+    }) 
 
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
