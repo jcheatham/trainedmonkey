@@ -1,5 +1,5 @@
 var Car = function(background, foreground, x, y) {
-  this.backgroundSprite = phaser.add.sprite(x, 10000, background);
+  this.backgroundSprite = phaser.add.sprite(x, y, background);
   this.backgroundSprite.anchor.setTo(0.5, 0.5);
   this.backgroundSprite.z = 80;
 
@@ -33,6 +33,14 @@ Car.prototype.loadAssets = function() {
   phaser.load.image('train.gumball.foreground', 'img/game_rdy_PNGs/gumball_room_foreground.png');
   phaser.load.image('train.owl.background', 'img/game_rdy_PNGs/owl_room_bg.png');
   phaser.load.image('train.owl.foreground', 'img/game_rdy_PNGs/owl_room_foreground.png');
+
+  phaser.load.image('train.gumball-temp.background', 'img/game_rdy_PNGs/gumball_room_bg.png');
+  phaser.load.image('train.gumball-temp.foreground', 'img/game_rdy_PNGs/gumball_room_foreground.png');
+  phaser.load.image('train.owl-temp.background', 'img/game_rdy_PNGs/owl_room_bg.png');
+  phaser.load.image('train.owl-temp.foreground', 'img/game_rdy_PNGs/owl_room_foreground.png');
+
+
+
 };
 
 
