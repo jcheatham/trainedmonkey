@@ -171,6 +171,7 @@ var game = (function() {
   result.dropItem = function() {
     console.log("dropItem");
     result.currentItem.falling = true;
+    result.currentItem.velocityY = 0.0;
     result.currentItem.attachedToTrain = false;
     result.currentItem = items.empty;
     result.monkey.attachItem(result.currentItem);
