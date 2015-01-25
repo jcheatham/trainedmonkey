@@ -4,15 +4,15 @@ items["boiler"] = {
     phaser.load.image('gumsplat', 'img/bubblegum_splat.png');
   },
   init: function(phaser) {
-    this.sprite = new PIXI.Point(6270, 280);
-    this.interactRect = new Phaser.Rectangle(-150,-200,300,400);
+    this.sprite = new PIXI.Point(6170, 325);
+    this.interactRect = new Phaser.Rectangle(-50,-200,300,400);
     this.boiled = false;
     this.gumSplat = null;
     this.nop = 0;
 
-    var e = phaser.add.emitter(6300, 280);
+    var e = phaser.add.emitter(this.sprite.x-10, this.sprite.y-30);
     e.z = 100;
-    e.width = 50;
+    e.width = 30;
     e.makeParticles('steam');
     e.minParticleSpeed.set(0, -400);
     e.maxParticleSpeed.set(0, -500);
@@ -56,7 +56,7 @@ items["boiler"] = {
     }
   },
   seal: function() {
-    this.gumSplat = phaser.add.sprite(6300, 280, 'gumsplat');
+    this.gumSplat = phaser.add.sprite(this.sprite.x, this.sprite.y, 'gumsplat');
     this.gumSplat.anchor.setTo(0.5, 0.5);
     this.gumSplat.z = 100;
   },
