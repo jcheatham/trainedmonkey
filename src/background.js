@@ -16,23 +16,28 @@ var background = (function(){
     }
 
     results.trees = [];
-    for(var i = 0; i < 30; i++){
+    for(var i = 0; i < 20; i++){
       results.trees.push(phaser.add.sprite(i*Math.floor(Math.random()*600), Math.floor(Math.random()*200), 'tree2'));
       results.trees.push(phaser.add.sprite(i*Math.floor(Math.random()*600), Math.floor(Math.random()*200), 'tree1'));
     }
   };
 
-  results.update = function() {
+  results.update = function(countDown) {
+
+    countDown = countDown || false;
 
     _.each(results.trees, function(tree){
       if (tree.x < -300) {
+
         tree.x = phaser._width * 7;
       }
-      tree.x -= 0.5 * phaser.time.totalElapsedSeconds();
+      if (countDown !== false) tree.x -= countDown;
+      else tree.x -= 0.5 * phaser.time.totalElapsedSeconds();
 
     });
     _.each(results.mountains, function(mountain){
-      mountain.tilePosition.x -= 0.05 * phaser.time.totalElapsedSeconds();
+      if (countDown !== false) mountain.tilePosition.x -= countDown;
+      else mountain.tilePosition.x -= 0.05 * phaser.time.totalElapsedSeconds();
     });
   };
 

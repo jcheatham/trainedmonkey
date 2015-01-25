@@ -4,11 +4,15 @@ var game = (function() {
     collisionHandlers: {}
   };
 
+  var countDown;
+
   //lose function
   var lose = function(){
-    //loseamations
+
     setTimeout(function(){
+      clearInterval(slowTrain);
       result.lose.y = 0;
+
       setTimeout(function(){
         window.open("/", "_self");
       }, 2000);
@@ -18,8 +22,12 @@ var game = (function() {
 
   //win function
   var win = function(){
-    //winamations
+    countDown = 5;
+    var slowTrain = setInterval(function(){
+      countDown--;
+    }, 1000);
     setTimeout(function(){
+      clearInterval(slowTrain);
       result.lose.x = 0;
       setTimeout(function(){
         window.open("/", "_self");
