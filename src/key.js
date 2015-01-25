@@ -27,3 +27,7 @@ game.interactions["key"]["door"] = function() {
   items.key.sprite.y = 10000;
 };
 
+game.interactions["key"]["activationLever"] = function() {
+  items.activationLever.activate();
+};
+

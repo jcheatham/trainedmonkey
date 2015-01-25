@@ -55,3 +55,8 @@ game.interactions["fishbowl"]["cage"] = function() {
   // items.fishbowl.sprite.y = 10000;
   items.cat.jumpDown();
 };
+
+game.interactions["fishbowl"]["activationLever"] = function() {
+  items.activationLever.activate();
+};
+

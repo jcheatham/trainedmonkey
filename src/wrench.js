@@ -25,3 +25,8 @@ game.interactions["wrench"]["steamSwitch"] = function(){
   game.discardItem();
   items.wrench.sprite.y = 10000;
 };
+
+game.interactions["wrench"]["activationLever"] = function() {
+  items.activationLever.activate();
+};
+
