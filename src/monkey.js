@@ -171,6 +171,10 @@ Monkey.prototype.update = function(game) {
       this.interactRect.y + this.sprite.y,
       this.interactRect.width,
       this.interactRect.height);
+
+  if(items.door.closed && this.sprite.x > 2000 && this.sprite.x < 2030) {
+    this.sprite.x = 2000;
+  }
 }
 
 
@@ -217,6 +221,7 @@ Monkey.prototype.jump = function() {
 }
 
 Monkey.prototype.confuse = function() {
+  game.sounds.monkey.play();
   var e = phaser.add.emitter(this.headSprite.x, this.headSprite.y, 10);
   e.width = 75;
   e.makeParticles('question_mark');

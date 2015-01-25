@@ -12,7 +12,7 @@ var game = (function() {
 
 
     // phaser.load.image('monkey', 'img/monkey.png');
-    // phaser.load.audio('jump', 'audio/train0.wav');
+    phaser.load.audio('monkey', 'audio/monkey1.wav');
     phaser.load.audio('music', 'audio/music.mp3');
     // loadImage('item', 'img/item.png');
     // loadImage('train', 'img/train.png');
@@ -27,7 +27,7 @@ var game = (function() {
 
     result.trains = [];
 
-    var trainNames = ['owl-temp', 'gumball-temp', 'owl', 'gumball', 'steam', 'engine'];
+    var trainNames = ['owl-temp', 'fishbowl', 'owl', 'gumball', 'steam', 'engine'];
 
     _.each(trainNames, function(name) {
       result.trains.push(
@@ -40,6 +40,9 @@ var game = (function() {
 
     result.music = phaser.add.audio('music');
     result.music.play();
+    
+    result.sounds = {}
+    result.sounds.monkey = phaser.add.audio('monkey');
 
 
     background.init();
@@ -56,6 +59,9 @@ var game = (function() {
       item.attachedToTrain = true;
 
     });
+
+    // The locked door 
+    items.door.closed = true;
 
 
 

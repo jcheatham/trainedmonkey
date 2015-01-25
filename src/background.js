@@ -32,7 +32,7 @@ var background = (function(){
 
     });
     _.each(results.mountains, function(mountain){
-      mountain.tilePosition.x -= .5;
+      mountain.tilePosition.x -= 0.1 * phaser.time.totalElapsedSeconds();
     });
   };
 
