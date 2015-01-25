@@ -21,14 +21,17 @@
  
         function preload () {
             trainedmonkey.loadAssets();
+            background.loadAssets();
         }
 
         function create () {
             trainedmonkey.init();
+            background.loadAssets();
         }
 
         function update() {
             trainedmonkey.update();
+            background.update();
         }
 
         function render() {
