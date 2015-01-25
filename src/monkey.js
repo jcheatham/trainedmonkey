@@ -93,10 +93,10 @@ Monkey.prototype.update = function() {
     this.animationIndex -= this.animationSequence.length;
   }
 
-  console.log(this.animationSequence);
-  console.log(this.animationIndex);
+  // console.log(this.animationSequence);
+  // console.log(this.animationIndex);
   var animationFrame = this.animationSequence[Math.floor(this.animationIndex)];
-  console.log(animationFrame);
+  // console.log(animationFrame);
 
 
   var spriteName = "monkey.walk." + animationFrame.toString();
