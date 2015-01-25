@@ -26,3 +26,6 @@ game.interactions["empty"]["wig"] = function(){
   game.monkey.headSprite.setTexture( PIXI.TextureCache['monkey.wig'] );
 };
 
+game.interactions["wig"]["activationLever"] = function() {
+  items.activationLever.activate();
+};

@@ -18,13 +18,21 @@ var game = (function() {
 
   //win function
   result.win = function(){
-    setTimeout(function(){
-      result.winImg.y = 0;
-      setTimeout(function(){
-        window.open("/", "_self");
-      }, 2000);
-    }, 5000);
+    var e = phaser.add.emitter(7000, -10, 200);
+    e.z = 1000;
+    e.width = 1000;
+    e.makeParticles('bananana');
+    e.minParticleSpeed.set(0, 100);
+    e.maxParticleSpeed.set(0, 300);
+    //e.setRotation(-90, 90);
+    e.setScale(2, 4, 2, 4);
+    e.gravity = 1000;
+    //	false means don't explode all the sprites at once, but instead release at a rate of one particle per 100ms
+    //	The 5000 value is the lifespan of each particle before it's killed
+    e.start(false, 1000, 20);
+    result.monkey.flying = true;
 
+    //setTimeout(function(){ result.winImg.y = 0; setTimeout(function(){ window.open("/", "_self"); }, 2000); }, 5000);
   };
 
   result.loadAssets = function () {
@@ -34,6 +42,7 @@ var game = (function() {
     // monkey.loadAssets();
     phaser.load.image('lose', 'img/monkeywrench_lose.png');
     phaser.load.image('win', 'img/monkeywrench_win.png');
+    phaser.load.image('bananana', 'img/banana_rain.png');
 
 
     // phaser.load.image('monkey', 'img/monkey.png');
@@ -195,12 +204,12 @@ var game = (function() {
       }
 
       if (collides && wantInteraction) {
+        wantInteraction = false;
         if (!result.interactions[result.currentItem.name] || !result.interactions[result.currentItem.name][item.name]) {
           console.log("FAILURE", result.currentItem.name, item.name);
           result.monkey.confuse();
           return;
         }
-        wantInteraction = false;
         result.interactions[result.currentItem.name][item.name]();
       }
     });

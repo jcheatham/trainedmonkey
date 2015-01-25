@@ -28,3 +28,6 @@ game.interactions["gumball"]["boiler"] = function() {
   items.boiler.seal();
   game.monkey.chewing = false;
 };
+game.interactions["gumball"]["activationLever"] = function() {
+  items.activationLever.activate();
+};

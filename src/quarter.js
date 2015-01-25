@@ -25,3 +25,6 @@ game.interactions["quarter"]["gumballMachine"] = function(){
   items.quarter.sprite.y = 10000;
   items.gumballMachine.purchase();
 };
+game.interactions["quarter"]["activationLever"] = function() {
+  items.activationLever.activate();
+};
