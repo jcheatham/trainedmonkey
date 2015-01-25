@@ -36,8 +36,18 @@ game.interactions["fishbowl"]["key"] = function(){ game.acquireItem("key"); };
 game.interactions["fishbowl"]["wig"] = function(){ game.acquireItem("wig"); };
 game.interactions["fishbowl"]["quarter"] = function(){ game.acquireItem("quarter"); };
 
+
 game.interactions["fishbowl"]["fishTable"] = function() {
   game.discardItem();
-  items.fishbowl.sprite.y = 10000;
+
+  items.fishbowl.falling = false;
+  items.fishbowl.attachedToTrain = true;
+  
+  // var fishbowlDoneSprite = phaser.add.sprite(items.fishTable.sprite.x, items.fishTable.sprite.y, 'fishbowl');
+  // fishbowlDoneSprite.anchor.setTo(0.5, 0.5);
+  // fishbowlDoneSprite.z = 94;
+  // fishbowlDoneSprite.scale = new PIXI.Point(4, 4);
+
+  // items.fishbowl.sprite.y = 10000;
   items.cat.jumpDown();
 };

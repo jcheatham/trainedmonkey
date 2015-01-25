@@ -2,6 +2,7 @@ items["wig"] = {
   name: "wig",
   preload: function(phaser) {
     phaser.load.image('wig', 'img/wig.png');
+    phaser.load.image('monkey.wig', 'img/monkey_head_wig.png');
   },
   init: function(phaser) {
     this.sprite = phaser.add.sprite(4900, 200, 'wig');
@@ -19,7 +20,11 @@ items["wig"] = {
   }
 };
 
-game.interactions["empty"]["wig"] = function(){ game.acquireItem("wig"); };
+game.interactions["empty"]["wig"] = function(){
+  game.acquireItem("wig");
+  items.wig.sprite.visible = false;
+  game.monkey.headSprite.setTexture( PIXI.TextureCache['monkey.wig'] );
+};
 
 game.interactions["wig"] = {};
 game.interactions["wig"]["empty"] = function(){ game.discardItem(); };
@@ -28,3 +33,19 @@ game.interactions["wig"]["fishbowl"] = function(){ game.acquireItem("fishbowl");
 game.interactions["wig"]["key"] = function(){ game.acquireItem("key"); };
 game.interactions["wig"]["quarter"] = function(){ game.acquireItem("quarter"); };
 
+
+game.interactions["wig"]["owl"] = function() {
+  game.discardItem();
+  
+  items.wig.sprite.visible = true;
+  game.monkey.headSprite.setTexture( PIXI.TextureCache['monkey.head'] );
+
+  
+  // var fishbowlDoneSprite = phaser.add.sprite(items.fishTable.sprite.x, items.fishTable.sprite.y, 'fishbowl');
+  // fishbowlDoneSprite.anchor.setTo(0.5, 0.5);
+  // fishbowlDoneSprite.z = 94;
+  // fishbowlDoneSprite.scale = new PIXI.Point(4, 4);
+
+  // items.fishbowl.sprite.y = 10000;
+  items.owl.flyAway();
+};

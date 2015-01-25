@@ -1,5 +1,6 @@
 items["cat"] = {
   name: "cat",
+  active: true,
   preload: function(phaser) {
     phaser.load.image('cat', 'img/cat_bod.png');
     phaser.load.image('cat.head', 'img/cat_head.png');
@@ -34,13 +35,49 @@ items["cat"] = {
     game.followTrain(this.sprite);
     game.followTrain(this.tailSprite);
 
-    var headTargetX = this.sprite.x + 0;
-    var headTargetY = this.sprite.y - 30;
+    if(this.active) {
 
-    this.headSprite.x += (headTargetX - this.headSprite.x) / 10.0;
-    this.headSprite.y += (headTargetY - this.headSprite.y) / 50.0;
+      var headTargetX = this.sprite.x + 0;
+      var headTargetY = this.sprite.y - 30;
 
+      this.headSprite.x += (headTargetX - this.headSprite.x) / 10.0;
+      this.headSprite.y += (headTargetY - this.headSprite.y) / 50.0;
 
+    } else {
+
+      this.headSprite.x = this.sprite.x + 0;
+      this.headSprite.y = this.sprite.y - 30;
+
+      this.tailSprite.x = this.sprite.x + 25;
+      this.tailSprite.y = this.sprite.y - 20;
+
+    }
+
+  },
+  jumpDown: function() {
+    this.active = false;
+    this.interactRect = null;
+    this.collisionRect = null;
+
+    game.dropItem(items.key);
+
+    game.monkey.canMove = false;
+
+    var catTweenX = phaser.add.tween(items.cat.sprite);
+    catTweenX.onComplete.add(function(){
+      game.monkey.canMove = true;
+      items.fishbowl.fishSprite.visible = false;
+    }, catTweenX);
+    catTweenX.to({ x: 800}, 1000, Phaser.Easing.Linear.None, true);
+
+    var catTweenY = phaser.add.tween(items.cat.sprite);
+    catTweenY.to({ y: 300}, 1000, function(k) {
+      return k * k * k * k * k;
+
+    }, true); 
+
+    // game.dropItem(items.cat);
+    
 
   }
 };

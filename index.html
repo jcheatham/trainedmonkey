@@ -35,6 +35,10 @@
 
     <script type="text/javascript">
 
+    var debug = true;
+    // var debug = false;
+
+
     var phaser = {};
 
     window.onload = function() {
@@ -59,12 +63,14 @@
         }
 
         function render() {
-            phaser.debug.cameraInfo(phaser.camera, 32, 32);
-            phaser.debug.spriteCoords(game.monkey.sprite, 32, 500);
-            // phaser.debug.text(game.monkey.velocityX.toString(), 32, 300);
+            if(debug) {
+                phaser.debug.cameraInfo(phaser.camera, 32, 32);
+                phaser.debug.spriteCoords(game.monkey.sprite, 32, 500);
+                phaser.debug.text(game.monkey.velocityX.toString(), 32, 300);
 
-            // if (game.monkey.collisionRect) { phaser.debug.geom(game.monkey.collisionRect); }
-            // _.each(items, function(item) { if (item.collisionRect) { phaser.debug.geom(item.collisionRect); } });
+                if (game.monkey.collisionRect) { phaser.debug.geom(game.monkey.collisionRect); }
+                _.each(items, function(item) { if (item.collisionRect) { phaser.debug.geom(item.collisionRect); } });
+            }
         }
 
     };
