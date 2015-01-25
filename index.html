@@ -75,7 +75,7 @@
             render: render 
         };
 
-        phaser = new Phaser.Game(1000, 562, Phaser.AUTO, '', false, false);
+        phaser = new Phaser.Game(1000, 562, Phaser.AUTO, '', main, false, false);
 
         phaser.state.add('main', main);
         console.log(phaser);
