@@ -4,9 +4,10 @@ items["gumballMachine"] = {
     phaser.load.image('gumballMachine', 'img/gumballmachine.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(550, 350, 'gumballMachine');
+    this.sprite = phaser.add.sprite(3695, 265, 'gumballMachine');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 100;
+    this.sprite.scale = new PIXI.Point(8, 8);
     this.interactRect = new Phaser.Rectangle(-10,-20,20,40);
   }
 };
