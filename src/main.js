@@ -26,7 +26,7 @@ var game = (function() {
 
     result.trains = [];
 
-    var trainNames = ['gumball', 'steam', 'engine'];
+    var trainNames = ['owl', 'gumball', 'steam', 'engine'];
 
     _.each(trainNames, function(name) {
       result.trains.push(
