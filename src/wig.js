@@ -26,20 +26,3 @@ game.interactions["empty"]["wig"] = function(){
   game.monkey.headSprite.setTexture( PIXI.TextureCache['monkey.wig'] );
 };
 
-game.interactions["wig"] = {};
-
-game.interactions["wig"]["owl"] = function() {
-  game.discardItem();
-
-  items.wig.sprite.visible = true;
-  game.monkey.headSprite.setTexture( PIXI.TextureCache['monkey.head'] );
-
-
-  // var fishbowlDoneSprite = phaser.add.sprite(items.fishTable.sprite.x, items.fishTable.sprite.y, 'fishbowl');
-  // fishbowlDoneSprite.anchor.setTo(0.5, 0.5);
-  // fishbowlDoneSprite.z = 94;
-  // fishbowlDoneSprite.scale = new PIXI.Point(4, 4);
-
-  // items.fishbowl.sprite.y = 10000;
-  items.owl.flyAway();
-};
