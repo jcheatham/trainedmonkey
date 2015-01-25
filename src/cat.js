@@ -71,16 +71,16 @@ items["cat"] = {
       game.monkey.canMove = true;
       items.fishbowl.fishSprite.visible = false;
     }, catTweenX);
-    catTweenX.to({ x: 500}, 1000, Phaser.Easing.Linear.None, true);
+    catTweenX.to({ x: 490}, 1000, Phaser.Easing.Linear.None, true);
 
     var catTweenY = phaser.add.tween(items.cat.sprite);
-    catTweenY.to({ y: 300}, 1000, function(k) {
+    catTweenY.to({ y: 235}, 1000, function(k) {
       return k * k * k * k;
 
-    }, true); 
+    }, true);
 
     // game.dropItem(items.cat);
-    
+
 
   }
 };
