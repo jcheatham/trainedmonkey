@@ -22,7 +22,7 @@ items["owl"] = {
     this.sprite.x += game.trainMotionOffsetX;
     this.sprite.y += game.trainMotionOffsetY;
 
-    var headTargetX = this.sprite.x + 8;
+    var headTargetX = this.sprite.x + 4;
     var headTargetY = this.sprite.y - 30;
 
     this.headSprite.x += (headTargetX - this.headSprite.x) / 50.0;
