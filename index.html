@@ -41,9 +41,6 @@
 
         phaser = new Phaser.Game(1000, 562, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render }, false, false);
 
-        phaser.camera.x = 0;
-        // phaser.camera.bounds = null;
-
         function preload () {
             game.loadAssets();
             background.loadAssets();

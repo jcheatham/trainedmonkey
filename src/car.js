@@ -36,12 +36,12 @@ Car.prototype.loadAssets = function() {
 
   phaser.load.image('train.gumball-temp.background', 'img/gumball_room_bg.png');
   phaser.load.image('train.gumball-temp.foreground', 'img/gumball_room_foreground.png');
-  
-  phaser.load.image('train.owl-temp.background', 'img/owl_room_bg.png');
-  phaser.load.image('train.owl-temp.foreground', 'img/owl_room_foreground.png'); 
 
-  phaser.load.image('train.fishbowl.background', 'img/fb_room_bg.png');
-  phaser.load.image('train.fishbowl.foreground', 'img/fb_room_foreground.png');
+  phaser.load.image('train.owl-temp.background', 'img/owl_room_bg.png');
+  phaser.load.image('train.owl-temp.foreground', 'img/owl_room_foreground.png');
+
+  phaser.load.image('train.fishbowl.background', 'img/fishbowl_room_bg.png');
+  phaser.load.image('train.fishbowl.foreground', 'img/fishbowl_room_foreground.png');
 };
 
 

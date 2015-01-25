@@ -6,18 +6,22 @@ items["cat"] = {
     phaser.load.image('cat.tail', 'img/cat_tail.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(700, 300, 'cat');
+
+    var posX = 200;
+    var posY = 150;
+
+    this.sprite = phaser.add.sprite(posX, posY, 'cat');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 93;
     this.sprite.scale = new PIXI.Point(4, 4);
     this.interactRect = new Phaser.Rectangle(-50,-50,100,200);
 
-    this.headSprite = phaser.add.sprite(700, 250, 'cat.head');
+    this.headSprite = phaser.add.sprite(posX, posY - 50, 'cat.head');
     this.headSprite.anchor.setTo(0.5, 0.5);
     this.headSprite.z = 95;
     this.headSprite.scale = new PIXI.Point(4, 4);
 
-    this.tailSprite = phaser.add.sprite(730, 280, 'cat.tail');
+    this.tailSprite = phaser.add.sprite(posX + 25, posY - 20, 'cat.tail');
     this.tailSprite.anchor.setTo(0.1, 0.7);
     this.tailSprite.z = 89;
     this.tailSprite.scale = new PIXI.Point(4, 4);
@@ -41,7 +45,4 @@ items["cat"] = {
   }
 };
 
-game.interactions["empty"]["cat"] = function(){
-  console.log("interact empty cat");
-};
-//
+//game.interactions["empty"]["cat"] = function(){ };

@@ -64,7 +64,7 @@ var game = (function() {
 
     _.each(trainNames, function(name) {
       result.trains.push(
-        new Car('train.' + name + '.background', 'train.' + name + '.foreground', 
+        new Car('train.' + name + '.background', 'train.' + name + '.foreground',
                 500 + 1100 * trainNames.indexOf(name), phaser.world.centerY)
       );
     });
@@ -73,7 +73,7 @@ var game = (function() {
 
     result.music = phaser.add.audio('music');
     result.music.play();
-    
+
     result.sounds = {}
     result.sounds.monkey = phaser.add.audio('monkey');
 
@@ -90,10 +90,12 @@ var game = (function() {
     _.each(items, function(item){
       if (item.init) item.init(phaser);
       item.attachedToTrain = true;
+      item.falling = false;
+
 
     });
 
-    // The locked door 
+    // The locked door
     items.door.closed = true;
 
 
@@ -121,7 +123,7 @@ var game = (function() {
         phaser.camera.x = start - 1100;
         result.monkey.sprite.x = start - 200;
       }
-      
+
     })
   }
 
@@ -134,7 +136,7 @@ var game = (function() {
 
     result.handleDoors();
 
-    
+
 
 
     result.trainMotionOffsetX = 0.3 * Math.sin(2 * phaser.time.totalElapsedSeconds());
@@ -142,15 +144,17 @@ var game = (function() {
 
     _.each(items, function(item) {
       if(item.attachedToTrain) {
-        game.followTrain(item);  
+        game.followTrain(item);
+      } else if(item.falling){
+        game.applyGravity(item);
       }
     })
 
     result.monkey.update(result);
-    
+
     _.each(result.trains, function(car) {
       car.update(result);
-    }) 
+    })
 
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
@@ -194,11 +198,12 @@ var game = (function() {
       }
 
       if (collides && wantInteraction) {
-        wantInteraction = false;
         if (!result.interactions[result.currentItem.name] || !result.interactions[result.currentItem.name][item.name]) {
           console.log("FAILURE", result.currentItem.name, item.name);
+          result.monkey.confuse();
           return;
         }
+        wantInteraction = false;
         result.interactions[result.currentItem.name][item.name]();
       }
     });
@@ -208,33 +213,49 @@ var game = (function() {
     }
   }
 
-  result.dropItem = function() {
-    console.log("dropItem");
-    result.currentItem.attachedToTrain = true;
+  result.discardItem = function() {
+    if (result.currentItem == items.empty) { return; }
+    result.dropItem(result.currentItem);
     result.currentItem = items.empty;
     result.monkey.attachItem(result.currentItem);
   }
 
-  result.removeItem = function(item) {
-    console.log("removeItem ",item);
-  }
-
-  result.addItem = function(item) {
-    console.log("addItem ",item);
+  result.dropItem = function(item) {
+    item.falling = true;
+    item.velocityY = 0.0;
+    item.attachedToTrain = false;
   }
 
   result.acquireItem = function(item) {
     console.log("acquireItem ",item);
     if (!items[item]) { console.log("unknown item: ",item); return; }
-    //if (result.currentItem != items.empty) { console.log("WARNING: acquiring item while currentItem != empty"); }
+    result.discardItem();
     result.currentItem = items[item];
     result.monkey.attachItem(result.currentItem);
     item.attachedToTrain = false;
   }
 
 
+  result.applyGravity = function(item) {
+    var gravity = 0.1;
+
+    if(item.sprite === undefined) return;
+    if(item.velocityY === undefined) item.velocityY = 0;
+
+    item.velocityY += gravity;
+    item.sprite.y += item.velocityY;
+
+    if(item.sprite.y > game.monkey.groundHeight) {
+      item.falling = false;
+      item.attachedToTrain = true;
+    }
+
+    item.sprite.x += game.trainMotionOffsetX;
+    item.sprite.y += game.trainMotionOffsetY;
+  }
+
   result.followTrain = function(item) {
-    if(item.sprite === undefined) return;    
+    if(item.sprite === undefined) return;
     item.sprite.x += game.trainMotionOffsetX;
     item.sprite.y += game.trainMotionOffsetY;
   }

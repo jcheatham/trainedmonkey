@@ -11,7 +11,5 @@ items["engineRoomSteam"] = {
   }
 };
 
-game.interactions["empty"]["engineRoomSteam"] = function(){
-  console.log("interact empty engineRoomSteam");
-};
+//game.interactions["empty"]["engineRoomSteam"] = function(){ };
 

@@ -10,7 +10,7 @@ items["owl"] = {
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 90;
     this.sprite.scale = new PIXI.Point(4, 4);
-    this.interactRect = new Phaser.Rectangle(-10,-20,20,40);
+    this.interactRect = new Phaser.Rectangle(-100,-50,200,250);
 
     this.headSprite = phaser.add.sprite(2700, 250, 'owl.head');
     this.headSprite.anchor.setTo(0.5, 0.5);
@@ -44,7 +44,11 @@ items["owl"] = {
 
 };
 
-game.interactions["empty"]["owl"] = function(){
-  console.log("interact empty owl");
+// game.interactions["empty"]["owl"] = function(){ };
+
+game.collisionHandlers["owl"] = function() {
+  if (game.currentItem == items.wig) {
+    console.log("BERSERKER BARRAGE");
+  }
 };
 

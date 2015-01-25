@@ -12,11 +12,3 @@ items["door"] = {
     this.interactRect = new Phaser.Rectangle(-20,-20,100,400);
   }
 };
-
-game.interactions["key"]["door"] = function() { 
-  items.door.closed = false;
-  items.door.sprite.visible = false;
-  game.dropItem('key');
-  items.key.sprite.y = 10000;
-};
-

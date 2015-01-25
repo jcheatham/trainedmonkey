@@ -15,8 +15,14 @@ items["wrench"] = {
 game.interactions["empty"]["wrench"] = function(){ game.acquireItem("wrench"); };
 
 game.interactions["wrench"] = {};
-game.interactions["wrench"]["empty"] = function(){ game.dropItem(); };
+game.interactions["wrench"]["empty"] = function(){ game.discardItem(); };
 game.interactions["wrench"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
 game.interactions["wrench"]["key"] = function(){ game.acquireItem("key"); };
 game.interactions["wrench"]["wig"] = function(){ game.acquireItem("wig"); };
 game.interactions["wrench"]["quarter"] = function(){ game.acquireItem("quarter"); };
+
+game.interactions["wrench"]["steamSwitch"] = function(){
+  items.steamSwitch.turn();
+  game.discardItem();
+  items.wrench.sprite.y = 10000;
+};
