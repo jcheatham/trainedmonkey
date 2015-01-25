@@ -31,6 +31,8 @@ Car.prototype.loadAssets = function() {
   phaser.load.image('train.steam.foreground', 'img/game_rdy_PNGs/steam_switch_room_foreground.png');
   phaser.load.image('train.gumball.background', 'img/game_rdy_PNGs/gumball_room_bg.png');
   phaser.load.image('train.gumball.foreground', 'img/game_rdy_PNGs/gumball_room_foreground.png');
+  phaser.load.image('train.owl.background', 'img/game_rdy_PNGs/owl_room_bg.png');
+  phaser.load.image('train.owl.foreground', 'img/game_rdy_PNGs/owl_room_foreground.png');
 };
 
 
