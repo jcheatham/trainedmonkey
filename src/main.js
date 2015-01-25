@@ -5,6 +5,7 @@ var game = (function() {
 
     Monkey.prototype.loadAssets();
     // monkey.loadAssets();
+    // phaser.load.image('bg', 'img/placeholder_bg.png');
 
     // phaser.load.image('monkey', 'img/monkey.png');
     phaser.load.audio('jump', 'audio/train0.wav');
