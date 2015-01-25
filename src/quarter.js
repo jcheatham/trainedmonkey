@@ -16,3 +16,8 @@ game.interactions["empty"]["quarter"] = function(){ game.acquireItem("quarter");
 
 game.interactions["quarter"] = {};
 game.interactions["quarter"]["empty"] = function(){ game.dropItem(); };
+game.interactions["quarter"]["wrench"] = function(){ game.acquireItem("wrench"); };
+game.interactions["quarter"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
+game.interactions["quarter"]["key"] = function(){ game.acquireItem("key"); };
+game.interactions["quarter"]["wig"] = function(){ game.acquireItem("wig"); };
+
