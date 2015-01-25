@@ -6,7 +6,7 @@ items["key"] = {
   init: function(phaser) {
     this.sprite = phaser.add.sprite(600, 300, 'key');
     this.sprite.anchor.setTo(0.5, 0.5);
-    this.sprite.z = 10;
+    this.sprite.z = 100;
     this.interactRect = new Phaser.Rectangle(-10,-20,20,40);
   },
 };

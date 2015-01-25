@@ -14,9 +14,9 @@
     <script src="src/monkey.js"></script>
     <script src="src/items.js"></script>
 
+    <script src="src/activationlever.js"></script>
     <script src="src/birdnest.js"></script>
     <script src="src/cat.js"></script>
-    <script src="src/engineroomlever.js"></script>
     <script src="src/engineroomsteam.js"></script>
     <script src="src/fishbowl.js"></script>
     <script src="src/gumballmachine.js"></script>
@@ -25,7 +25,7 @@
     <script src="src/key.js"></script>
     <script src="src/owl.js"></script>
     <script src="src/quarter.js"></script>
-    <script src="src/steampressurevalve.js"></script>
+    <script src="src/steamvalve.js"></script>
     <script src="src/steamswitch.js"></script>
     <script src="src/wig.js"></script>
     <script src="src/wrench.js"></script>
@@ -63,8 +63,7 @@
             // phaser.debug.text(game.monkey.velocityX.toString(), 32, 300);
 
             if (game.monkey.collisionRect) { phaser.debug.geom(game.monkey.collisionRect); }
-            if (items.key.collisionRect) { phaser.debug.geom(items.key.collisionRect); }
-            if (items["portal1"].collisionRect) { phaser.debug.geom(items["portal1"].collisionRect); }
+            _.each(items, function(item) { if (item.collisionRect) { phaser.debug.geom(item.collisionRect); } });
         }
 
     };

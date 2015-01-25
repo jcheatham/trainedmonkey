@@ -5,7 +5,7 @@ var Car = function(background, foreground, x, y) {
 
   this.targetX = phaser.world.centerX;
   this.targetY = phaser.world.centerY;
-  
+
   this.x = this.targetX;
   this.y = this.targetY;
 
@@ -25,22 +25,19 @@ Car.prototype.update = function(game) {
 }
 
 Car.prototype.loadAssets = function() {
-  phaser.load.image('train.engine.background', 'img/game_rdy_PNGs/engine_room.png');
-  phaser.load.image('train.engine.foreground', 'img/game_rdy_PNGs/foreground_layer.png');
-  phaser.load.image('train.steam.background', 'img/game_rdy_PNGs/steam_switch_room_bg.png');
-  phaser.load.image('train.steam.foreground', 'img/game_rdy_PNGs/steam_switch_room_foreground.png');
-  phaser.load.image('train.gumball.background', 'img/game_rdy_PNGs/gumball_room_bg.png');
-  phaser.load.image('train.gumball.foreground', 'img/game_rdy_PNGs/gumball_room_foreground.png');
-  phaser.load.image('train.owl.background', 'img/game_rdy_PNGs/owl_room_bg.png');
-  phaser.load.image('train.owl.foreground', 'img/game_rdy_PNGs/owl_room_foreground.png');
+  phaser.load.image('train.engine.background', 'img/engine_room.png');
+  phaser.load.image('train.engine.foreground', 'img/foreground_layer.png');
+  phaser.load.image('train.steam.background', 'img/steam_switch_room_bg.png');
+  phaser.load.image('train.steam.foreground', 'img/steam_switch_room_foreground.png');
+  phaser.load.image('train.gumball.background', 'img/gumball_room_bg.png');
+  phaser.load.image('train.gumball.foreground', 'img/gumball_room_foreground.png');
+  phaser.load.image('train.owl.background', 'img/owl_room_bg.png');
+  phaser.load.image('train.owl.foreground', 'img/owl_room_foreground.png');
 
-  phaser.load.image('train.gumball-temp.background', 'img/game_rdy_PNGs/gumball_room_bg.png');
-  phaser.load.image('train.gumball-temp.foreground', 'img/game_rdy_PNGs/gumball_room_foreground.png');
-  phaser.load.image('train.owl-temp.background', 'img/game_rdy_PNGs/owl_room_bg.png');
-  phaser.load.image('train.owl-temp.foreground', 'img/game_rdy_PNGs/owl_room_foreground.png');
-
-
-
+  phaser.load.image('train.gumball-temp.background', 'img/gumball_room_bg.png');
+  phaser.load.image('train.gumball-temp.foreground', 'img/gumball_room_foreground.png');
+  phaser.load.image('train.owl-temp.background', 'img/owl_room_bg.png');
+  phaser.load.image('train.owl-temp.foreground', 'img/owl_room_foreground.png');
 };
 
 
