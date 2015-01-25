@@ -10,6 +10,7 @@
 
     <script src="src/main.js"></script>
     <script src="src/background.js"></script>
+    <script src="src/monkey.js"></script>
     <script src="src/items.js"></script>
 
     <script type="text/javascript">
@@ -18,7 +19,7 @@
 
     window.onload = function() {
 
-        phaser = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+        phaser = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render }, false, false);
  
         function preload () {
             game.loadAssets();
@@ -37,8 +38,9 @@
 
         function render() {
             phaser.debug.cameraInfo(phaser.camera, 32, 32);
-            phaser.debug.spriteCoords(game.monkeySprite, 32, 500);
+            phaser.debug.spriteCoords(game.monkey.sprite, 32, 500);
             phaser.debug.spriteCoords(items.key.sprite, 400, 500);
+            phaser.debug.text(game.monkey.velocityX.toString(), 32, 300);
         }
 
     };
