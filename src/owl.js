@@ -4,6 +4,7 @@ items["owl"] = {
     phaser.load.image('owl', 'img/owl_bod.png');
     phaser.load.image('owl.head', 'img/owl_head.png');
     phaser.load.image('owl.wing', 'img/owl_wing.png');
+    phaser.load.image('owl.wig', 'img/owl_head_wig.png');
   },
   init: function(phaser) {
     this.startX = 2700;
@@ -54,8 +55,9 @@ items["owl"] = {
     var tween = phaser.add.tween(items.owl.sprite);
     tween.onComplete.add(function(){
       game.discardItem();
-      items.wig.sprite.visible = true;
+      items.wig.sprite.visible = false;
       game.monkey.headSprite.setTexture( PIXI.TextureCache['monkey.head'] );
+      items.owl.headSprite.setTexture( PIXI.TextureCache['owl.wig'] );
       items.owl.flyToNest();
     }, tween);
     tween.to({ x: game.monkey.headSprite.x, y: game.monkey.headSprite.y}, 500, Phaser.Easing.Linear.None, true);

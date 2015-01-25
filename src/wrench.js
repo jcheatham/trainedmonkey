@@ -4,7 +4,7 @@ items["wrench"] = {
     phaser.load.image('wrench', 'img/wrench.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(1920, 330, 'wrench');
+    this.sprite = phaser.add.sprite(1870, 420, 'wrench');
     this.sprite.rotation = -1.0;
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 100;
