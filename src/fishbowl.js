@@ -5,7 +5,7 @@ items["fishbowl"] = {
     phaser.load.image('fish', 'img/fish_fish.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(1400, 300, 'fishbowl');
+    this.sprite = phaser.add.sprite(1450, 275, 'fishbowl');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 94;
     this.sprite.scale = new PIXI.Point(4, 4);
@@ -36,7 +36,7 @@ game.interactions["fishbowl"]["wig"] = function(){ game.acquireItem("wig"); };
 game.interactions["fishbowl"]["quarter"] = function(){ game.acquireItem("quarter"); };
 
 
-game.interactions["fishbowl"]["fishTable"] = function() {
+game.interactions["fishbowl"]["cage"] = function() {
   game.discardItem();
 
   items.fishbowl.falling = false;
@@ -44,6 +44,9 @@ game.interactions["fishbowl"]["fishTable"] = function() {
   items.fishbowl.interactRect = null;
   items.fishbowl.collisionRect = null;
 
+  items.fishbowl.sprite.y = 270;
+  // items.fishbowl.
+  
   // var fishbowlDoneSprite = phaser.add.sprite(items.fishTable.sprite.x, items.fishTable.sprite.y, 'fishbowl');
   // fishbowlDoneSprite.anchor.setTo(0.5, 0.5);
   // fishbowlDoneSprite.z = 94;

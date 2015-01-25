@@ -6,26 +6,33 @@ items["owl"] = {
     phaser.load.image('owl.wing', 'img/owl_wing.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(2700, 270, 'owl');
+    this.startX = 2700;
+    this.startY = 270;
+    this.sprite = phaser.add.sprite(this.startX, this.startY, 'owl');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 90;
     this.sprite.scale = new PIXI.Point(4, 4);
     this.interactRect = new Phaser.Rectangle(-300,-150,600,500);
 
-    this.headSprite = phaser.add.sprite(2700, 250, 'owl.head');
+    this.headSprite = phaser.add.sprite(this.startX, this.startY-20, 'owl.head');
     this.headSprite.anchor.setTo(0.5, 0.5);
     this.headSprite.z = 91;
     this.headSprite.scale = new PIXI.Point(4, 4);
+    this.flying = false;
   },
   update: function() {
 
     game.followTrain(this.sprite);
 
-    var headTargetX = this.sprite.x + 4;
-    var headTargetY = this.sprite.y - 30;
-
-    this.headSprite.x += (headTargetX - this.headSprite.x) / 50.0;
-    this.headSprite.y += (headTargetY - this.headSprite.y) / 50.0;
+    if (this.flying) {
+      this.headSprite.x = this.sprite.x;
+      this.headSprite.y = this.sprite.y - 20;
+    } else {
+      var headTargetX = this.sprite.x + 4;
+      var headTargetY = this.sprite.y - 30;
+      this.headSprite.x += (headTargetX - this.headSprite.x) / 50.0;
+      this.headSprite.y += (headTargetY - this.headSprite.y) / 50.0;
+    }
 
     // var dx = headTargetX - this.headSprite.x;
     // var dy = headTargetY - this.headSprite.y;
@@ -41,34 +48,39 @@ items["owl"] = {
 
 
   },
-  flyAway: function() {
-    game.dropItem(items.quarter);
-
+  flyToWig: function() {
     game.monkey.canMove = false;
-
-    var owlTweenX = phaser.add.tween(items.owl.sprite);
-    owlTweenX.onComplete.add(function(){
+    this.flying = true;
+    var tween = phaser.add.tween(items.owl.sprite);
+    tween.onComplete.add(function(){
+      game.discardItem();
+      items.wig.sprite.visible = true;
+      game.monkey.headSprite.setTexture( PIXI.TextureCache['monkey.head'] );
+      items.owl.flyToNest();
+    }, tween);
+    tween.to({ x: game.monkey.headSprite.x, y: game.monkey.headSprite.y}, 500, Phaser.Easing.Linear.None, true);
+  },
+  flyToNest: function() {
+    var tween = phaser.add.tween(items.owl.sprite);
+    tween.onComplete.add(function(){
       game.monkey.canMove = true;
-    }, owlTweenX);
-    owlTweenX.to({ x: 600}, 1500, Phaser.Easing.Linear.None, true);
-
-    var owlTweenY = phaser.add.tween(items.cat.sprite);
-    owlTweenY.to({ y: -500}, 1500, function(k) {
-      return k * k * k * k;
-    }, true); 
-
-    // game.dropItem(items.cat);
-    
-
+      game.dropItem(items.quarter);
+      this.flying = false;
+    }, tween);
+    tween.to({ x: this.startX, y: this.startY}, 500, Phaser.Easing.Linear.None, true);
   }
-
 };
-
-// game.interactions["empty"]["owl"] = function(){ };
 
 game.collisionHandlers["owl"] = function() {
   if (game.currentItem == items.wig) {
-    console.log("BERSERKER BARRAGE");
+
+    // var fishbowlDoneSprite = phaser.add.sprite(items.fishTable.sprite.x, items.fishTable.sprite.y, 'fishbowl');
+    // fishbowlDoneSprite.anchor.setTo(0.5, 0.5);
+    // fishbowlDoneSprite.z = 94;
+    // fishbowlDoneSprite.scale = new PIXI.Point(4, 4);
+
+    // items.fishbowl.sprite.y = 10000;
+    items.owl.flyToWig();
   }
 };
 

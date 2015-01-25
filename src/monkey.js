@@ -37,6 +37,8 @@ var Monkey = function() {
 
   this.baseGroundHeight = 400;
   this.groundHeight = this.baseGroundHeight;
+
+  this.chewing = false;
 }
 
 Monkey.prototype.loadAssets = function() {
@@ -45,6 +47,7 @@ Monkey.prototype.loadAssets = function() {
   phaser.load.image('monkey.walk.2', 'img/monkey_walk_2.png');
   phaser.load.image('monkey.walk.3', 'img/monkey_walk_3.png');
   phaser.load.image('monkey.head', 'img/monkey_head.png');
+  phaser.load.image('monkey.head.chew', 'img/monkey_head_chew.png');
   phaser.load.image('monkey.jump', 'img/monkey_jump.png');
   phaser.load.image('question_mark', 'img/question_mark.png');
 }
@@ -58,6 +61,7 @@ Monkey.prototype.onGround = function() {
 }
 
 Monkey.prototype.update = function(game) {
+
 
   this.sprite.x += game.trainMotionOffsetX
   this.sprite.y += game.trainMotionOffsetY
@@ -116,12 +120,23 @@ Monkey.prototype.update = function(game) {
   this.sprite.y += this.velocityY;
   if (this.flying) {
     if (this.sprite.x != 7100) { phaser.camera.x = 6600; }
+    this.sprite.setTexture(PIXI.TextureCache["monkey.jump"])
     this.sprite.x = 7100;
+    this.sprite.y = 300 + 100 * Math.sin(phaser.time.totalElapsedSeconds());
   } else {
     if (this.sprite.x < 100) this.sprite.x = 100;
     if (this.sprite.x > 6200) this.sprite.x = 6200;
   }
 
+  if(this.chewing) {
+    if(Math.floor(3.0 * phaser.time.totalElapsedSeconds()) % 2) {
+      this.headSprite.setTexture( PIXI.TextureCache['monkey.head'] );
+    } else {
+      this.headSprite.setTexture( PIXI.TextureCache['monkey.head.chew'] );
+    }
+  } else if(game.currentItem.name != 'wig')  {
+    this.headSprite.setTexture( PIXI.TextureCache['monkey.head'] );
+  }
 
   // Animation
 
@@ -129,6 +144,7 @@ Monkey.prototype.update = function(game) {
   if(this.animationIndex >= this.animationSequence.length) {
     this.animationIndex -= this.animationSequence.length;
   }
+
 
   var animationFrame = this.animationSequence[Math.floor(this.animationIndex)];
 
@@ -213,19 +229,17 @@ Monkey.prototype.handleMotionInput = function() {
 
   // Jump button - up
   if(phaser.input.keyboard.isDown(38)) {
-    if(this.onGround() && this.hasJump) {
-      this.jump();
-    }
-  }
-  else if(this.onGround()) {
+    this.jump();
+  } else if(this.onGround()) {
     this.hasJump = true;
   }
 
 }
 
 Monkey.prototype.jump = function() {
-  this.velocityY = -10.0 + -10.0 * Math.abs(this.velocityX);
+  if (!this.hasJump) { return; }
   this.hasJump = false;
+  this.velocityY = -10.0 + -10.0 * Math.abs(this.velocityX);
 }
 
 Monkey.prototype.confuse = function() {
