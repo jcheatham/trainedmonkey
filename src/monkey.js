@@ -222,7 +222,7 @@ Monkey.prototype.confuse = function() {
   e.makeParticles('question_mark');
   e.minParticleSpeed.set(0, -400);
   e.maxParticleSpeed.set(0, -500);
-  e.setRotation(0, 0);
+  e.setRotation(-60, 60);
   //e.setAlpha(0, 1, 0.5);
   e.setScale(0.5, 0.5, 1, 1);
   e.gravity = 1000;

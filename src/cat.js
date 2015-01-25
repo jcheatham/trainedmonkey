@@ -10,7 +10,7 @@ items["cat"] = {
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 93;
     this.sprite.scale = new PIXI.Point(4, 4);
-    this.interactRect = new Phaser.Rectangle(-10,-20,20,40);
+    this.interactRect = new Phaser.Rectangle(-50,-50,100,200);
 
     this.headSprite = phaser.add.sprite(700, 250, 'cat.head');
     this.headSprite.anchor.setTo(0.5, 0.5);
@@ -36,7 +36,7 @@ items["cat"] = {
     this.headSprite.x += (headTargetX - this.headSprite.x) / 10.0;
     this.headSprite.y += (headTargetY - this.headSprite.y) / 50.0;
 
- 
+
 
   }
 };
@@ -44,4 +44,4 @@ items["cat"] = {
 game.interactions["empty"]["cat"] = function(){
   console.log("interact empty cat");
 };
-// 
+//
