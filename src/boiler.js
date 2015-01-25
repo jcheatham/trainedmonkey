@@ -40,7 +40,7 @@ items["boiler"] = {
 
       var tween = phaser.add.tween(items.boiler.sprite);
       tween.onComplete.add(function(){
-        console.log("call win condition");
+        game.win();
       }, tween);
       tween.to({z: 101}, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
 
@@ -49,7 +49,7 @@ items["boiler"] = {
       this.emitter.on = true;
       var tween = phaser.add.tween(items.boiler.sprite);
       tween.onComplete.add(function(){
-        console.log("call lose condition");
+        game.lose();
       }, tween);
       tween.to({z: 101}, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
 

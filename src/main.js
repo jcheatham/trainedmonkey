@@ -27,7 +27,7 @@ var game = (function() {
     }, 1000);
     setTimeout(function(){
       clearInterval(slowTrain);
-      result.win.Img.y = 0;
+      result.winImg.y = 0;
       setTimeout(function(){
         window.open("/", "_self");
       }, 2000);
