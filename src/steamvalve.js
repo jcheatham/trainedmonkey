@@ -25,7 +25,5 @@ items["steamValve"] = {
   }
 };
 
-game.interactions["empty"]["steamValve"] = function(){
-  console.log("interact empty steamValve");
-};
+//game.interactions["empty"]["steamValve"] = function(){ };
 

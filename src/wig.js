@@ -9,6 +9,13 @@ items["wig"] = {
     this.sprite.z = 100;
     this.sprite.scale = new PIXI.Point(4, 4);
     this.interactRect = new Phaser.Rectangle(-10,-20,20,40);
+    this.floored = false;
+  },
+  fall: function() {
+    if (this.floored) { return; }
+    this.floored = true;
+    var tween = phaser.add.tween(items.wig.sprite);
+    tween.to({y: game.monkey.groundHeight}, 500, Phaser.Easing.Linear.None, true, 500, 0, false);
   }
 };
 

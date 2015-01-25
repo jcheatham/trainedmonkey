@@ -41,7 +41,4 @@ items["cat"] = {
   }
 };
 
-game.interactions["empty"]["cat"] = function(){
-  console.log("interact empty cat");
-};
-//
+//game.interactions["empty"]["cat"] = function(){ };

@@ -24,7 +24,5 @@ items["steamSwitch"] = {
   }
 };
 
-game.interactions["empty"]["steamSwitch"] = function(){
-  console.log("interact empty steamSwitch");
-};
+//game.interactions["empty"]["steamSwitch"] = function(){ };
 

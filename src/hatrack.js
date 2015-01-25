@@ -17,9 +17,10 @@ items["hatrack"] = {
     this.prone = true;
     var rackTween = phaser.add.tween(items.hatrack.sprite);
     rackTween.to({rotation: Math.PI*0.5}, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+    this.interactRect = null;
+    this.collisionRect = null;
+    items.wig.fall();
   }
 };
 
-game.interactions["empty"]["hatrack"] = function(){
-  console.log("interact empty hatrack");
-};
+//game.interactions["empty"]["hatrack"] = function(){ };

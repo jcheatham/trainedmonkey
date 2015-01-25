@@ -44,7 +44,5 @@ items["owl"] = {
 
 };
 
-game.interactions["empty"]["owl"] = function(){
-  console.log("interact empty owl");
-};
+//game.interactions["empty"]["owl"] = function(){ };
 

@@ -21,10 +21,10 @@ game.interactions["key"]["fishbowl"] = function(){ game.acquireItem("fishbowl");
 game.interactions["key"]["wig"] = function(){ game.acquireItem("wig"); };
 game.interactions["key"]["quarter"] = function(){ game.acquireItem("quarter"); };
 
-game.interactions["key"]["gumball"] = function(){
-  game.acquireItem("gumball");
-};
-game.interactions["key"]["cat"] = function(){
-  game.monkey.confuse();
+game.interactions["key"]["door"] = function() {
+  items.door.closed = false;
+  items.door.sprite.visible = false;
+  game.dropItem();
+  items.key.sprite.y = 10000;
 };
 
