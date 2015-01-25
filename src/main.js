@@ -37,8 +37,8 @@ var game = (function() {
     _.each(items, function(item){
       if (item.init) item.init(phaser);
     });
-
     phaser.world.sort('z', Phaser.Group.SORT_ASCENDING);
+    console.log('SORTING');
 
     result.currentItem = items.empty;
     result.canUseItem = true;
