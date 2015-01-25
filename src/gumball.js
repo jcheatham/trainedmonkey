@@ -15,6 +15,7 @@ items["gumball"] = {
 
 game.interactions["empty"]["gumball"] = function(){
   game.acquireItem("gumball");
+  game.monkey.chewing = true;
   items.gumball.sprite.visible = false;
 };
 

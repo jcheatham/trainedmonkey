@@ -8,6 +8,9 @@ items["cat"] = {
   },
   init: function(phaser) {
 
+
+
+
     var posX = 150;
     var posY = 110;
 
@@ -68,11 +71,11 @@ items["cat"] = {
       game.monkey.canMove = true;
       items.fishbowl.fishSprite.visible = false;
     }, catTweenX);
-    catTweenX.to({ x: 800}, 1000, Phaser.Easing.Linear.None, true);
+    catTweenX.to({ x: 500}, 1000, Phaser.Easing.Linear.None, true);
 
     var catTweenY = phaser.add.tween(items.cat.sprite);
     catTweenY.to({ y: 300}, 1000, function(k) {
-      return k * k * k * k * k;
+      return k * k * k * k;
 
     }, true); 
 

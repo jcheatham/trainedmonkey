@@ -6,7 +6,7 @@ items["quarter"] = {
   init: function(phaser) {
     this.sprite = phaser.add.sprite(2700, 250, 'quarter');
     this.sprite.anchor.setTo(0.5, 0.5);
-    this.sprite.z = 100;
+    this.sprite.z = 89;
     this.sprite.scale = new PIXI.Point(4, 4);
     this.interactRect = new Phaser.Rectangle(-30,-30,60,60);
   }
