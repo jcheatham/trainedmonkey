@@ -51,8 +51,6 @@ var background = (function(){
         bg22 = phaser.add.tileSprite(-phaser._width, 0, 800, 300, 'bg2');
     results.cloudTrack = new SpriteTrack(500);
     results.cloudTrack.add(bg21).add(bg22);
-
-    console.log('clouds and mountains');
   };
 
   results.update = function() {
