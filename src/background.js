@@ -2,6 +2,8 @@ var background = (function(){
 
   var results = {};
 
+  results.speed = 0;
+
   results.loadAssets = function() {
     phaser.load.image('mountain', 'img/bg_1.png');
     phaser.load.image('tree1', 'img/tree_0.png');
@@ -22,20 +24,28 @@ var background = (function(){
     }
   };
 
-  results.update = function(countDown) {
+  results.update = function(breaks) {
+    if (results.speed > 30){
+      game.lose();
+    }
+
+    if (breaks) {
+      if (results.speed > 0) results.speed--;
+    } else {
+      results.speed = phaser.time.totalElapsedSeconds();
+    }
 
     _.each(results.trees, function(tree){
       if (tree.x < -300) {
 
         tree.x = phaser._width * 7;
       }
-      if (countDown) tree.x -= countDown;
-      else tree.x -= 0.5 * phaser.time.totalElapsedSeconds();
+      tree.x -= Math.floor(results.speed/2);
 
     });
     _.each(results.mountains, function(mountain){
-      if (countDown) mountain.tilePosition.x -= countDown;
-      else mountain.tilePosition.x -= 0.05 * phaser.time.totalElapsedSeconds();
+      mountain.tilePosition.x -= Math.floor(results.speed/10);
+      if (results.speed/10 < 0) game.win(); 
     });
   };
 

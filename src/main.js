@@ -4,14 +4,11 @@ var game = (function() {
     collisionHandlers: {}
   };
 
-  result.countDown = false;
+  result.breaks = false;
 
-  //lose function
   result.lose = function(){
-
     setTimeout(function(){
       result.loseImg.y = 0;
-
       setTimeout(function(){
         window.open("/", "_self");
       }, 2000);
@@ -21,13 +18,8 @@ var game = (function() {
 
   //win function
   result.win = function(){
-    countDown = 5;
-    var slowTrain = setInterval(function(){
-      result.countDown--;
-    }, 1000);
     setTimeout(function(){
-      clearInterval(slowTrain);
-      result.win.Img.y = 0;
+      result.winImg.y = 0;
       setTimeout(function(){
         window.open("/", "_self");
       }, 2000);
@@ -132,7 +124,7 @@ var game = (function() {
 
 
   result.update = function() {
-    background.update(result.countDown);
+    background.update(result.breaks);
 
     // if(phaser.input.keyboard.isDown(81)) {
     //   phaser.camera.x += 10;
