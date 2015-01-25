@@ -5,7 +5,7 @@ items["fishbowl"] = {
     phaser.load.image('fish', 'img/fish_fish.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(1400, 300, 'fishbowl');
+    this.sprite = phaser.add.sprite(1450, 275, 'fishbowl');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 94;
     this.sprite.scale = new PIXI.Point(4, 4);

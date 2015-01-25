@@ -26,4 +26,5 @@ game.interactions["gumball"]["boiler"] = function() {
   game.discardItem();
   items.gumball.sprite.y = 10000;
   items.boiler.seal();
+  game.monkey.chewing = false;
 };
