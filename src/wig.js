@@ -4,7 +4,7 @@ items["wig"] = {
     phaser.load.image('wig', 'img/wig.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(1880, 200, 'wig');
+    this.sprite = phaser.add.sprite(4900, 200, 'wig');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 100;
     this.sprite.scale = new PIXI.Point(4, 4);
