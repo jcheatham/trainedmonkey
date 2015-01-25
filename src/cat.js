@@ -8,8 +8,8 @@ items["cat"] = {
   },
   init: function(phaser) {
 
-    var posX = 200;
-    var posY = 150;
+    var posX = 150;
+    var posY = 110;
 
     this.sprite = phaser.add.sprite(posX, posY, 'cat');
     this.sprite.anchor.setTo(0.5, 0.5);

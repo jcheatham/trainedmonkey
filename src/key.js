@@ -4,7 +4,7 @@ items["key"] = {
     phaser.load.image('key', 'img/key.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(200, 200, 'key');
+    this.sprite = phaser.add.sprite(150, 150, 'key');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 100;
     this.sprite.scale = new PIXI.Point(2, 2);

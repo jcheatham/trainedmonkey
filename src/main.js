@@ -60,7 +60,7 @@ var game = (function() {
 
     result.trains = [];
 
-    var trainNames = ['owl-temp', 'fishbowl', 'owl', 'gumball', 'steam', 'engine'];
+    var trainNames = ['key', 'fishbowl', 'owl', 'gumball', 'steam', 'engine'];
 
     _.each(trainNames, function(name) {
       result.trains.push(
