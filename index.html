@@ -41,6 +41,14 @@
             phaser.debug.spriteCoords(game.monkey.sprite, 32, 500);
             phaser.debug.spriteCoords(items.key.sprite, 400, 500);
             // phaser.debug.text(game.monkey.velocityX.toString(), 32, 300);
+
+            var monkeyRect = new Phaser.Rectangle(game.monkey.interactRect.x + game.monkey.sprite.x,
+              game.monkey.interactRect.y + game.monkey.sprite.y, game.monkey.interactRect.width, game.monkey.interactRect.height);
+            phaser.debug.geom(monkeyRect);
+
+            var itemRect = new Phaser.Rectangle(items.key.interactRect.x + items.key.sprite.x,
+              items.key.interactRect.y + items.key.sprite.y, items.key.interactRect.width, items.key.interactRect.height);
+            phaser.debug.geom(itemRect);
         }
 
     };

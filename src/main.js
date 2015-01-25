@@ -35,7 +35,7 @@ var game = (function() {
 
     phaser.world.sort('z', Phaser.Group.SORT_ASCENDING);
 
-    result.currentItem = "key";
+    result.currentItem = items.empty;
     result.canUseItem = true;
   }
 
@@ -56,14 +56,26 @@ var game = (function() {
     //   result.jumpSound.play();
     // }
 
-    if(phaser.input.keyboard.isDown(37)) {
-      result.jumpSound.play();
-    }
-
     if (phaser.input.keyboard.isDown(32)) {
       if (result.canUseItem) {
         result.canUseItem = false;
-        result.interact("gum");
+
+        var monkeyRect = new Phaser.Rectangle(result.monkey.interactRect.x + result.monkey.sprite.x,
+            result.monkey.interactRect.y + result.monkey.sprite.y,
+            result.monkey.interactRect.width,
+            result.monkey.interactRect.height);
+        var itemRect = new Phaser.Rectangle();
+
+        if (!_.some(items, function(item) {
+          if (!item.sprite || item == result.currentItem) { return false; }
+          itemRect.x = item.interactRect.x + item.sprite.x;
+          itemRect.y = item.interactRect.y + item.sprite.y;
+          itemRect.width = item.interactRect.width;
+          itemRect.height = item.interactRect.height;
+          if (monkeyRect.intersects(itemRect)) { result.interact(item); return true; }
+        })) {
+          result.interact(items.empty);
+        }
       }
     } else {
       result.canUseItem = true;
@@ -71,28 +83,28 @@ var game = (function() {
   }
 
   result.interact = function(item) {
-    if (!items[result.currentItem]) { console.log("Unhandled currentItem "+result.currentItem); return; }
-    (items[result.currentItem].interactions[item] || items[result.currentItem].interactions["default"])(item);
+    (result.currentItem.interactions[item.name] || result.currentItem.interactions["default"])(item);
   }
 
-  result.dropItem = function(item) {
-    console.log("dropItem "+item);
-    // if currentItem == empty, return
+  result.dropItem = function() {
+    console.log("dropItem");
+    result.currentItem = items.empty;
+    result.monkey.attachItem(result.currentItem);
   }
 
   result.removeItem = function(item) {
-    console.log("removeItem "+item);
+    console.log("removeItem ",item);
   }
 
   result.addItem = function(item) {
-    console.log("addItem "+item);
+    console.log("addItem ",item);
   }
 
   result.acquireItem = function(item) {
-    console.log("acquireItem "+item);
-    if (!result.currentItem == "empty") { console.log("WARNING: acquiring item while currentItem != empty"); }
+    console.log("acquireItem ",item);
+    if (result.currentItem != items.empty) { console.log("WARNING: acquiring item while currentItem != empty"); }
     result.currentItem = item;
-    // set held item to item
+    result.monkey.attachItem(result.currentItem);
   }
 
   return result;

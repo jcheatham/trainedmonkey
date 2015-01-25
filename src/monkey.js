@@ -22,7 +22,7 @@ var Monkey = function() {
 
   this.mu = 0.2;
 
-  // Animation 
+  // Animation
 
   this.animationIndex = 0.0;
   this.animationSequence = [0, 1, 2, 3];
@@ -31,6 +31,8 @@ var Monkey = function() {
 
   this.hasJump = true;
 
+  this.interactRect = new Phaser.Rectangle(-50,-20,90,60);
+  this.canMove = true;
 }
 
 Monkey.prototype.loadAssets = function() {
@@ -56,12 +58,12 @@ Monkey.prototype.update = function() {
 
   if(this.onGround()) {
     if(Math.abs(this.velocityX) > 0.3) {
-    
+
       var unitVelocity = this.velocityX / Math.abs(this.velocityX);
-      this.direction = unitVelocity; 
+      this.direction = unitVelocity;
       var friction = -unitVelocity * this.mu;
       this.accelerationX = friction;
-    
+
     } else {
 
       if(this.velocityX > 0)  {
@@ -69,9 +71,9 @@ Monkey.prototype.update = function() {
       } else {
         this.direction = -1;
       }
-    
+
     }
-  } 
+  }
 
   this.handleMotionInput();
 
@@ -107,7 +109,6 @@ Monkey.prototype.update = function() {
     this.animationIndex -= this.animationSequence.length;
   }
 
-
   var animationFrame = this.animationSequence[Math.floor(this.animationIndex)];
 
   var spriteName = "monkey.walk." + animationFrame.toString();
@@ -136,7 +137,7 @@ Monkey.prototype.update = function() {
 
   if(this.itemSprite !== undefined) {
     var itemTargetX = this.sprite.x - (10 * this.sprite.scale.x);
-    var itemTargetY = this.sprite.y + 0.5 * this.animationIndex;
+    var itemTargetY = this.sprite.y + 0.5 * this.animationIndex - 40;
 
     this.itemSprite.x += (itemTargetX - this.itemSprite.x) / 3.0;
     this.itemSprite.y += (itemTargetY - this.itemSprite.y) / 3.0;
@@ -153,9 +154,7 @@ Monkey.prototype.update = function() {
 
 // game.monkey.attachItem(key);
 Monkey.prototype.attachItem = function(item) {
-  if(item.sprite !== undefined) {
-    this.itemSprite = item.sprite;
-  }
+  this.itemSprite = item.sprite;
 }
 
 Monkey.prototype.simpleGroundCollisionHandler = function() {
@@ -167,28 +166,27 @@ Monkey.prototype.simpleGroundCollisionHandler = function() {
 
 Monkey.prototype.handleMotionInput = function() {
 
+  if (!this.canMove) return;
+
   // Left button
   if(phaser.input.keyboard.isDown(39)) {
-    this.accelerationX += this.accelerationMag;   
+    this.accelerationX += this.accelerationMag;
   }
   // Right button
   if(phaser.input.keyboard.isDown(37)) {
-    this.accelerationX += -this.accelerationMag;  
-  } 
+    this.accelerationX += -this.accelerationMag;
+  }
 
   // Jump button - up
   if(phaser.input.keyboard.isDown(38)) {
     if(this.onGround() && this.hasJump) {
-      this.jump();  
+      this.jump();
     }
-  } 
+  }
   else if(this.onGround()) {
     this.hasJump = true;
   }
 
-  console.log(this.onGround());
-  console.log(this.hasJump);
-  
 }
 
 Monkey.prototype.jump = function() {
