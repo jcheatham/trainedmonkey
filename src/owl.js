@@ -10,7 +10,7 @@ items["owl"] = {
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 90;
     this.sprite.scale = new PIXI.Point(4, 4);
-    this.interactRect = new Phaser.Rectangle(-100,-50,200,250);
+    this.interactRect = new Phaser.Rectangle(-300,-150,600,500);
 
     this.headSprite = phaser.add.sprite(2700, 250, 'owl.head');
     this.headSprite.anchor.setTo(0.5, 0.5);
@@ -39,6 +39,26 @@ items["owl"] = {
     //   this.headSprite.y = headTargetY + maxD * Math.sin(theta);
     // }
 
+
+  },
+  flyAway: function() {
+    game.dropItem(items.quarter);
+
+    game.monkey.canMove = false;
+
+    var owlTweenX = phaser.add.tween(items.owl.sprite);
+    owlTweenX.onComplete.add(function(){
+      game.monkey.canMove = true;
+    }, owlTweenX);
+    owlTweenX.to({ x: 600}, 1500, Phaser.Easing.Linear.None, true);
+
+    var owlTweenY = phaser.add.tween(items.cat.sprite);
+    owlTweenY.to({ y: -500}, 1500, function(k) {
+      return k * k * k * k;
+    }, true); 
+
+    // game.dropItem(items.cat);
+    
 
   }
 

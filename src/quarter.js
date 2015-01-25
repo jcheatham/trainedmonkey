@@ -4,7 +4,7 @@ items["quarter"] = {
     phaser.load.image('quarter', 'img/quarter.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(2750, 350, 'quarter');
+    this.sprite = phaser.add.sprite(2700, 250, 'quarter');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 100;
     this.sprite.scale = new PIXI.Point(4, 4);
