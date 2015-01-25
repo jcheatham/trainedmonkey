@@ -12,3 +12,18 @@ items["door"] = {
     this.interactRect = new Phaser.Rectangle(-20,-20,100,400);
   }
 };
+
+
+items["backdoor"] = {
+  name: "backdoor",
+  closed: true,
+  preload: function(phaser) {
+    phaser.load.image('door', 'img/fish_bowl_room_door.png');
+  },
+  init: function(phaser) {
+    this.sprite = phaser.add.sprite(80, 325, 'door');
+    this.sprite.anchor.setTo(0.5, 0.5);
+    this.sprite.z = 100;
+    this.sprite.scale = new PIXI.Point(-1, 1);
+  }
+};

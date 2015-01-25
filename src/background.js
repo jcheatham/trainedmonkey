@@ -11,7 +11,7 @@ var background = (function(){
   };
 
   results.init = function() {
-    
+
     results.mountains = [];
     for(var i = 0; i < 5; i++){
       results.mountains.push(phaser.add.tileSprite(i*1912, 0, 1912, 600, 'mountain'));
@@ -25,7 +25,7 @@ var background = (function(){
   };
 
   results.update = function(breaks) {
-    if (results.speed > 90){
+    if (results.speed > 900){
       game.lose();
     }
 
@@ -38,14 +38,14 @@ var background = (function(){
     _.each(results.trees, function(tree){
       if (tree.x < -300) {
 
-        tree.x = phaser._width * 7;
+        tree.x = phaser._width * 8;
       }
       tree.x -= results.speed;
 
     });
     _.each(results.mountains, function(mountain){
       mountain.tilePosition.x -= Math.floor(results.speed/10);
-      if (results.speed/10 < 0) game.win(); 
+      if (results.speed/10 < 0) game.win();
     });
   };
 

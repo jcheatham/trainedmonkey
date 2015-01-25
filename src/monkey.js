@@ -33,6 +33,7 @@ var Monkey = function() {
 
   this.interactRect = new Phaser.Rectangle(-50,-20,90,60);
   this.canMove = true;
+  this.flying = false;
 
   this.baseGroundHeight = 400;
   this.groundHeight = this.baseGroundHeight;
@@ -113,6 +114,13 @@ Monkey.prototype.update = function(game) {
 
   this.sprite.x += this.velocityX;
   this.sprite.y += this.velocityY;
+  if (this.flying) {
+    if (this.sprite.x != 7100) { phaser.camera.x = 6600; }
+    this.sprite.x = 7100;
+  } else {
+    if (this.sprite.x < 100) this.sprite.x = 100;
+    if (this.sprite.x > 6200) this.sprite.x = 6200;
+  }
 
 
   // Animation

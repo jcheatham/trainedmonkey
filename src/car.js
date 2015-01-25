@@ -42,6 +42,10 @@ Car.prototype.loadAssets = function() {
 
   phaser.load.image('train.fishbowl.background', 'img/fishbowl_room_bg.png');
   phaser.load.image('train.fishbowl.foreground', 'img/fishbowl_room_foreground.png');
+
+
+  phaser.load.image('train.key.background', 'img/key_room_bg.png');
+  phaser.load.image('train.key.foreground', 'img/key_room_foreground.png');
 };
 
 

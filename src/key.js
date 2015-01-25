@@ -4,7 +4,7 @@ items["key"] = {
     phaser.load.image('key', 'img/key.png');
   },
   init: function(phaser) {
-    this.sprite = phaser.add.sprite(200, 200, 'key');
+    this.sprite = phaser.add.sprite(150, 150, 'key');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 100;
     this.sprite.scale = new PIXI.Point(2, 2);
@@ -15,7 +15,6 @@ items["key"] = {
 game.interactions["empty"]["key"] = function(){ game.acquireItem("key"); };
 
 game.interactions["key"] = {};
-game.interactions["key"]["empty"] = function(){ game.discardItem(); };
 game.interactions["key"]["wrench"] = function(){ game.acquireItem("wrench"); };
 game.interactions["key"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
 game.interactions["key"]["wig"] = function(){ game.acquireItem("wig"); };
