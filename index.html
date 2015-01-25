@@ -20,23 +20,23 @@
         phaser = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
  
         function preload () {
-            trainedmonkey.loadAssets();
+            game.loadAssets();
             background.loadAssets();
         }
 
         function create () {
-            trainedmonkey.init();
+            game.init();
             background.loadAssets();
         }
 
         function update() {
-            trainedmonkey.update();
+            game.update();
             background.update();
         }
 
         function render() {
             phaser.debug.cameraInfo(phaser.camera, 32, 32);
-            phaser.debug.spriteCoords(trainedmonkey.monkeySprite, 32, 500);
+            phaser.debug.spriteCoords(game.monkeySprite, 32, 500);
             phaser.debug.spriteCoords(items.key.sprite, 400, 500);
         }
 

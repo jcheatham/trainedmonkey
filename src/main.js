@@ -1,4 +1,4 @@
-var trainedmonkey = (function() {
+var game = (function() {
   var result = {};
 
   result.loadAssets = function () {
@@ -11,7 +11,7 @@ var trainedmonkey = (function() {
     // loadImage('train', 'img/train.png');
 
     _.each(items, function(item){
-      item.preload(phaser);
+      if (item.preload) item.preload(phaser);
     });
   }
 
@@ -32,10 +32,13 @@ var trainedmonkey = (function() {
     phaser.camera.follow(result.monkeySprite);
 
     _.each(items, function(item){
-      item.init(phaser);
+      if (item.init) item.init(phaser);
     });
 
     phaser.world.sort('z', Phaser.Group.SORT_ASCENDING);
+
+    result.currentItem = "empty";
+    result.canUseItem = true;
   }
 
   result.update = function() {
@@ -56,6 +59,34 @@ var trainedmonkey = (function() {
     if(phaser.input.keyboard.isDown(37)) {
       result.jumpSound.play();
     }
+
+    if (phaser.input.keyboard.isDown(32)) {
+      if (result.canUseItem) {
+        result.canUseItem = false;
+        var otherItem = "gum";
+        (items[result.currentItem].interactions[otherItem] || items[result.currentItem].interactions["default"])(otherItem);
+      }
+    } else {
+      result.canUseItem = true;
+    }
+  }
+
+  result.dropItem = function(item) {
+    console.log("dropItem "+item);
+    // if currentItem == empty, return
+  }
+
+  result.removeItem = function(item) {
+    console.log("removeItem "+item);
+  }
+
+  result.addItem = function(item) {
+    console.log("addItem "+item);
+  }
+
+  result.acquireItem = function(item) {
+    console.log("acquireItem "+item);
+    // set held item to item
   }
 
   return result;
