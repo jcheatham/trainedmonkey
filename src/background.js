@@ -33,29 +33,28 @@ var background = (function(){
   var results = {};
 
   results.loadAssets = function () {
-    phaser.load.image('bg1', 'img/bg1.png');
-    phaser.load.image('bg2', 'img/bg2.png');
+    phaser.load.image('bg1', 'img/bg_2.png');
+    // phaser.load.image('bg2', 'img/bg2.png');
 
   };
 
   results.init = function() {
 
     //initialize mountainclouds
-    var bg11 = phaser.add.tileSprite(0, 300, 800, 300, 'bg1'),
-        bg12 = phaser.add.tileSprite(-phaser._width, 300, 800, 300, 'bg1');
+    var bg11 = phaser.add.tileSprite(0, 0, 1000, 600, 'bg1'),
+        bg12 = phaser.add.tileSprite(-phaser._width, 0, 1000, 600, 'bg1');
     results.mountainTrack = new SpriteTrack(1000);
     results.mountainTrack.add(bg11).add(bg12);
 
-    //initialize cloudclouds
-    var bg21 = phaser.add.tileSprite(0, 0, 800, 300, 'bg2'),
-        bg22 = phaser.add.tileSprite(-phaser._width, 0, 800, 300, 'bg2');
-    results.cloudTrack = new SpriteTrack(500);
-    results.cloudTrack.add(bg21).add(bg22);
+    // //initialize cloudclouds
+    // var bg21 = phaser.add.tileSprite(0, 0, 800, 300, 'bg2'),
+    //     bg22 = phaser.add.tileSprite(-phaser._width, 0, 800, 300, 'bg2');
+    // results.cloudTrack = new SpriteTrack(500);
+    // results.cloudTrack.add(bg21).add(bg22);
   };
 
   results.update = function() {
     results.mountainTrack.iterate();
-    results.cloudTrack.iterate();
   };
 
   return results;
