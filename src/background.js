@@ -23,7 +23,6 @@ var background = (function(){
   SpriteTrack.prototype.iterate = function(){
     var _this = this;
     this.feed.forEach(function(sprite){
-      console.log(sprite.z);
       if (sprite.x === phaser._width) {
         sprite.x = (sprite._width - _this.pixelLength);
       }
