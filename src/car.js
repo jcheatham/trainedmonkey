@@ -1,5 +1,5 @@
 var Car = function(background, foreground, x, y) {
-  this.backgroundSprite = phaser.add.sprite(x, y, background);
+  this.backgroundSprite = phaser.add.sprite(x, 10000, background);
   this.backgroundSprite.anchor.setTo(0.5, 0.5);
   this.backgroundSprite.z = 80;
 

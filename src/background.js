@@ -6,11 +6,16 @@ var background = (function(){
   };
 
   results.init = function() {
-    results.mountains = phaser.add.tileSprite(0, 0, 1912, 600, 'mountain');
+    results.mountains = [];
+    for(var i = 0; i < 5; i++){
+      results.mountains.push(phaser.add.tileSprite(i*1912, 0, 1912, 600, 'mountain'));
+    }
   };
 
   results.update = function() {
-    results.mountains.tilePosition.x -= 1;
+    _.each(results.mountains, function(mountain){
+      mountain.tilePosition.x -= 1;
+    });
   };
 
   return results;
