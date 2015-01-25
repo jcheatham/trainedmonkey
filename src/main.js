@@ -20,7 +20,7 @@ var game = (function() {
 
   result.init = function() {
     result.monkey = new Monkey();
-    result.train = new Car();
+    result.train = new Car('train.engine.background', 'train.engine.foreground', phaser.world.centerX, phaser.world.centerY);
     background.init();
 
     // result.trainSpritePlaceholder = 
