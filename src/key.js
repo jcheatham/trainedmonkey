@@ -15,7 +15,6 @@ items["key"] = {
 game.interactions["empty"]["key"] = function(){ game.acquireItem("key"); };
 
 game.interactions["key"] = {};
-game.interactions["key"]["empty"] = function(){ game.discardItem(); };
 game.interactions["key"]["wrench"] = function(){ game.acquireItem("wrench"); };
 game.interactions["key"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
 game.interactions["key"]["wig"] = function(){ game.acquireItem("wig"); };

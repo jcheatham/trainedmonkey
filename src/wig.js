@@ -27,7 +27,6 @@ game.interactions["empty"]["wig"] = function(){
 };
 
 game.interactions["wig"] = {};
-game.interactions["wig"]["empty"] = function(){ game.discardItem(); };
 game.interactions["wig"]["wrench"] = function(){ game.acquireItem("wrench"); };
 game.interactions["wig"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
 game.interactions["wig"]["key"] = function(){ game.acquireItem("key"); };
@@ -36,11 +35,11 @@ game.interactions["wig"]["quarter"] = function(){ game.acquireItem("quarter"); }
 
 game.interactions["wig"]["owl"] = function() {
   game.discardItem();
-  
+
   items.wig.sprite.visible = true;
   game.monkey.headSprite.setTexture( PIXI.TextureCache['monkey.head'] );
 
-  
+
   // var fishbowlDoneSprite = phaser.add.sprite(items.fishTable.sprite.x, items.fishTable.sprite.y, 'fishbowl');
   // fishbowlDoneSprite.anchor.setTo(0.5, 0.5);
   // fishbowlDoneSprite.z = 94;

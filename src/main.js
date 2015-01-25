@@ -46,7 +46,7 @@ var game = (function() {
     _.each(items, function(item){
       if (item.preload) item.preload(phaser);
     });
-  }
+  };
 
   result.init = function() {
 
@@ -100,7 +100,7 @@ var game = (function() {
 
     result.currentItem = items.empty;
     result.canUseItem = true;
-  }
+  };
 
   result.handleDoors = function() {
     _.each(result.trains, function(car) {
@@ -108,20 +108,20 @@ var game = (function() {
 
       start = i * 1100;
 
-      //Right door of car
+       //Right door of car
       if(result.monkey.sprite.x > start + 950 && result.monkey.sprite.x < start + 1000) {
         phaser.camera.x = start + 1100;
         result.monkey.sprite.x = start + 1200;
-      }
+       }
 
-      //Left door of car
+       //Left door of car
       if(result.monkey.sprite.x > start + 0 && result.monkey.sprite.x < start + 50) {
         phaser.camera.x = start - 1100;
         result.monkey.sprite.x = start - 200;
-      }
+       }
 
     })
-  }
+  };
 
 
   result.update = function() {
@@ -206,22 +206,24 @@ var game = (function() {
     });
 
     if (wantInteraction) {
-      result.interactions[result.currentItem.name]["empty"]();
+      if (result.interactions[result.currentItem.name] && result.interactions[result.currentItem.name]["empty"]) {
+        result.interactions[result.currentItem.name]["empty"]();
+      }
     }
-  }
+  };
 
   result.discardItem = function() {
     if (result.currentItem == items.empty) { return; }
     result.dropItem(result.currentItem);
     result.currentItem = items.empty;
     result.monkey.attachItem(result.currentItem);
-  }
+  };
 
   result.dropItem = function(item) {
     item.falling = true;
     item.velocityY = 0.0;
     item.attachedToTrain = false;
-  }
+  };
 
   result.acquireItem = function(item) {
     console.log("acquireItem ",item);
@@ -230,7 +232,7 @@ var game = (function() {
     result.currentItem = items[item];
     result.monkey.attachItem(result.currentItem);
     item.attachedToTrain = false;
-  }
+  };
 
 
   result.applyGravity = function(item) {
@@ -249,13 +251,13 @@ var game = (function() {
 
     item.sprite.x += game.trainMotionOffsetX;
     item.sprite.y += game.trainMotionOffsetY;
-  }
+  };
 
   result.followTrain = function(item) {
     if(item.sprite === undefined) return;
     item.sprite.x += game.trainMotionOffsetX;
     item.sprite.y += game.trainMotionOffsetY;
-  }
+  };
 
 
   return result;

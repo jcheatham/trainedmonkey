@@ -9,7 +9,7 @@ items["fishbowl"] = {
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.z = 94;
     this.sprite.scale = new PIXI.Point(4, 4);
-    this.interactRect = new Phaser.Rectangle(-50,-40,100,100);
+    this.interactRect = new Phaser.Rectangle(-50,-40,100,200);
 
     this.fishSprite = phaser.add.sprite(1400, 250, 'fish');
     this.fishSprite.anchor.setTo(0.5, 0.5);
@@ -30,7 +30,6 @@ items["fishbowl"] = {
 game.interactions["empty"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
 
 game.interactions["fishbowl"] = {};
-game.interactions["fishbowl"]["empty"] = function(){ game.discardItem(); };
 game.interactions["fishbowl"]["wrench"] = function(){ game.acquireItem("wrench"); };
 game.interactions["fishbowl"]["key"] = function(){ game.acquireItem("key"); };
 game.interactions["fishbowl"]["wig"] = function(){ game.acquireItem("wig"); };
@@ -42,7 +41,9 @@ game.interactions["fishbowl"]["fishTable"] = function() {
 
   items.fishbowl.falling = false;
   items.fishbowl.attachedToTrain = true;
-  
+  items.fishbowl.interactRect = null;
+  items.fishbowl.collisionRect = null;
+
   // var fishbowlDoneSprite = phaser.add.sprite(items.fishTable.sprite.x, items.fishTable.sprite.y, 'fishbowl');
   // fishbowlDoneSprite.anchor.setTo(0.5, 0.5);
   // fishbowlDoneSprite.z = 94;
