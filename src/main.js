@@ -31,7 +31,7 @@ var game = (function() {
 
     _.each(trainNames, function(name) {
       result.trains.push(
-        new Car('train.' + name + '.background', 'train.' + name + '.foreground', 
+        new Car('train.' + name + '.background', 'train.' + name + '.foreground',
                 500 + 1100 * trainNames.indexOf(name), phaser.world.centerY)
       );
     });
@@ -89,7 +89,7 @@ var game = (function() {
         phaser.camera.x = start - 1100;
         result.monkey.sprite.x = start - 200;
       }
-      
+
     })
   }
 
@@ -102,7 +102,7 @@ var game = (function() {
 
     result.handleDoors();
 
-    
+
 
 
     result.trainMotionOffsetX = 0.3 * Math.sin(2 * phaser.time.totalElapsedSeconds());
@@ -110,15 +110,15 @@ var game = (function() {
 
     _.each(items, function(item) {
       if(item.attachedToTrain) {
-        game.followTrain(item);  
+        game.followTrain(item);
       }
     })
 
     result.monkey.update(result);
-    
+
     _.each(result.trains, function(car) {
       car.update(result);
-    }) 
+    })
 
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
@@ -162,6 +162,7 @@ var game = (function() {
         wantInteraction = false;
         if (!result.interactions[result.currentItem.name] || !result.interactions[result.currentItem.name][item.name]) {
           console.log("FAILURE", result.currentItem.name, item.name);
+          result.monkey.confuse();
           return;
         }
         result.interactions[result.currentItem.name][item.name]();
@@ -199,7 +200,7 @@ var game = (function() {
 
 
   result.followTrain = function(item) {
-    if(item.sprite === undefined) return;    
+    if(item.sprite === undefined) return;
     item.sprite.x += game.trainMotionOffsetX;
     item.sprite.y += game.trainMotionOffsetY;
   }

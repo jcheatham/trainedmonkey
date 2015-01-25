@@ -20,3 +20,7 @@ game.interactions["wrench"]["fishbowl"] = function(){ game.acquireItem("fishbowl
 game.interactions["wrench"]["key"] = function(){ game.acquireItem("key"); };
 game.interactions["wrench"]["wig"] = function(){ game.acquireItem("wig"); };
 game.interactions["wrench"]["quarter"] = function(){ game.acquireItem("quarter"); };
+
+game.interactions["wrench"]["steamSwitch"] = function(){
+  items.steamSwitch.turn();
+};
