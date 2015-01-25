@@ -27,6 +27,10 @@ game.interactions["empty"]["wig"] = function(){
 };
 
 game.interactions["wig"] = {};
+game.interactions["wig"]["wrench"] = function(){ game.acquireItem("wrench"); };
+game.interactions["wig"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
+game.interactions["wig"]["key"] = function(){ game.acquireItem("key"); };
+game.interactions["wig"]["quarter"] = function(){ game.acquireItem("quarter"); };
 game.interactions["wig"]["activationLever"] = function() {
   items.activationLever.activate();
 };

@@ -51,7 +51,11 @@ items["owl"] = {
   },
   flyToWig: function() {
     game.monkey.canMove = false;
-    this.flying = true;
+    items.wig.interactRect = null;
+    items.wig.collisionRect = null;
+    items.owl.interactRect = null;
+    items.owl.collisionRect = null;
+    items.owl.flying = true;
     var tween = phaser.add.tween(items.owl.sprite);
     tween.onComplete.add(function(){
       game.discardItem();
@@ -63,17 +67,18 @@ items["owl"] = {
     tween.to({ x: game.monkey.headSprite.x, y: game.monkey.headSprite.y}, 500, Phaser.Easing.Linear.None, true);
   },
   flyToNest: function() {
+    items.owl.flying = true;
     var tween = phaser.add.tween(items.owl.sprite);
     tween.onComplete.add(function(){
       game.monkey.canMove = true;
       game.dropItem(items.quarter);
-      this.flying = false;
-      this.interactRect = null;
-      this.collisionRect = null;
+      items.owl.flying = false;
     }, tween);
     tween.to({ x: this.startX, y: this.startY}, 500, Phaser.Easing.Linear.None, true);
   }
 };
+
+game.interactions["empty"]["owl"] = function(){ console.log("don't mess with the owl"); };
 
 game.collisionHandlers["owl"] = function() {
   if (game.currentItem == items.wig) {
