@@ -31,6 +31,7 @@
     <script src="src/wrench.js"></script>
     <script src="src/portal1.js"></script>
     <script src="src/door.js"></script>
+    <script src="src/fishTable.js"></script>
 
     <script type="text/javascript">
 
@@ -62,8 +63,8 @@
             phaser.debug.spriteCoords(game.monkey.sprite, 32, 500);
             // phaser.debug.text(game.monkey.velocityX.toString(), 32, 300);
 
-            if (game.monkey.collisionRect) { phaser.debug.geom(game.monkey.collisionRect); }
-            _.each(items, function(item) { if (item.collisionRect) { phaser.debug.geom(item.collisionRect); } });
+            // if (game.monkey.collisionRect) { phaser.debug.geom(game.monkey.collisionRect); }
+            // _.each(items, function(item) { if (item.collisionRect) { phaser.debug.geom(item.collisionRect); } });
         }
 
     };
