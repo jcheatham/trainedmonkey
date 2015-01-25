@@ -14,7 +14,7 @@ var background = (function(){
   };
 
   SpriteTrack.prototype.add = function(sprite){
-    sprite.z = (- this.distance);
+    sprite.z = -100 //(- this.distance);
     this.feed.push(sprite);
     this.pixelLength += sprite._width;
     return this;

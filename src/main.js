@@ -4,9 +4,10 @@ var game = (function() {
   result.loadAssets = function () {
 
     Monkey.prototype.loadAssets();
+    Car.prototype.loadAssets();
     // monkey.loadAssets();
-    // phaser.load.image('bg', 'img/placeholder_bg.png');
 
+ 
     // phaser.load.image('monkey', 'img/monkey.png');
     phaser.load.audio('jump', 'audio/train0.wav');
     // loadImage('item', 'img/item.png');
@@ -19,6 +20,10 @@ var game = (function() {
 
   result.init = function() {
     result.monkey = new Monkey();
+    result.train = new Car();
+    background.init();
+
+    // result.trainSpritePlaceholder = 
 
     result.time = 60;
     result.clock = phaser.add.text(phaser.world.centerX, phaser.world.centerY + 200, result.time.toString());

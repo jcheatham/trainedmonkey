@@ -9,6 +9,7 @@
     <body>
 
     <script src="src/main.js"></script>
+    <script src="src/car.js"></script>
     <script src="src/background.js"></script>
     <script src="src/monkey.js"></script>
     <script src="src/items.js"></script>
@@ -19,7 +20,7 @@
 
     window.onload = function() {
 
-        phaser = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render }, false, false);
+        phaser = new Phaser.Game(1000, 562, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render }, false, false);
 
         function preload () {
             game.loadAssets();
