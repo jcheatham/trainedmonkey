@@ -2,11 +2,12 @@ var items = {
   empty: {
     name: "empty",
     interactions: {
-      key: game.acquireItem,
-      //key: function(item){
-      //  game.monkey.canMove = false;
-      //  debugger;
-      //},
+      key: function(item){
+        game.monkey.canMove = false;
+        var itemTween = phaser.add.tween(item.sprite);
+        itemTween.onComplete.add(function(){ game.monkey.canMove = true; game.acquireItem(item); }, itemTween);
+        itemTween.to({x: 100, y: 100}, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
+      },
       gum: game.acquireItem,
       empty: function(item){ console.log("doo deeee dooo"); },
       default: function(item){ console.log("unimplemented interaction", "empty", item); },
