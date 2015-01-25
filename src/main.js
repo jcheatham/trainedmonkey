@@ -7,13 +7,10 @@ var game = (function() {
   result.breaks = false;
 
   result.lose = function(){
+    result.loseImg.y = 0;
     setTimeout(function(){
-      result.loseImg.y = 0;
-      setTimeout(function(){
-        window.open("/", "_self");
-      }, 2000);
+      window.open("/", "_self");
     }, 5000);
-
   };
 
   //win function
@@ -61,8 +58,8 @@ var game = (function() {
 
     result.loseImg = phaser.add.sprite(0, -1000, 'lose');
     result.winImg = phaser.add.sprite(0, -1000, 'win');
-    result.loseImg.z = 1000;
-    result.winImg.z = 1000;
+    result.loseImg.z = 5000;
+    result.winImg.z = 5000;
 
 
     result.monkey = new Monkey();
