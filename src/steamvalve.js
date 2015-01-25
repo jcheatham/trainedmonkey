@@ -1,7 +1,6 @@
 items["steamValve"] = {
   name: "steamValve",
   preload: function(phaser) {
-    phaser.load.image('steam', 'img/steam.png');
   },
   init: function(phaser) {
     var e = phaser.add.emitter(4900, -10);

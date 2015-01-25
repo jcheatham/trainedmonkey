@@ -5,14 +5,23 @@ items["activationLever"] = {
   },
   init: function(phaser) {
     this.sprite = phaser.add.sprite(5720, 315, 'activationLever');
-    this.sprite.anchor.setTo(0.5, 0.5);
+    this.sprite.anchor.setTo(1, 1);
     this.sprite.z = 100;
-    this.interactRect = new Phaser.Rectangle(-10,-20,20,40);
+    this.sprite.rotation = Math.PI * 0.25;
+    this.interactRect = new Phaser.Rectangle(-30,-100,60,200);
+  },
+  activate: function() {
+    game.monkey.canMove = false;
+    var tween = phaser.add.tween(items.activationLever.sprite);
+    tween.onComplete.add(function(){
+      items.boiler.boil();
+    }, tween);
+    tween.to({rotation: -0.1 * Math.PI }, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
   }
 };
 
 game.interactions["empty"]["activationLever"] = function(){
-  console.log("interact empty activationLever");
+  items.activationLever.activate();
 };
 
 

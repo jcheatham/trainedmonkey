@@ -33,7 +33,6 @@ var Monkey = function() {
 
   this.interactRect = new Phaser.Rectangle(-50,-20,90,60);
   this.canMove = true;
-  this.chewingGum = false;
 
   this.baseGroundHeight = 400;
   this.groundHeight = this.baseGroundHeight;

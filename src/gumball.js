@@ -14,11 +14,16 @@ items["gumball"] = {
 };
 
 game.interactions["empty"]["gumball"] = function(){
-  console.log("consume gum");
-  game.monkey.chewingGum = true;
-  items.gumball.sprite.y = 10000;
+  game.acquireItem("gumball");
+  items.gumball.sprite.visible = false;
 };
 
 game.interactions["gumball"] = {};
 game.interactions["gumball"]["empty"] = function(){ game.discardItem(); };
 game.interactions["gumball"]["gumballMachine"] = function(){ console.log("there's no putting the genie back in the bottle"); };
+
+game.interactions["gumball"]["boiler"] = function() {
+  game.discardItem();
+  items.gumball.sprite.y = 10000;
+  items.boiler.seal();
+};
