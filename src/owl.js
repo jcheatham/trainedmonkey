@@ -66,6 +66,8 @@ items["owl"] = {
       game.monkey.canMove = true;
       game.dropItem(items.quarter);
       this.flying = false;
+      this.interactRect = null;
+      this.collisionRect = null;
     }, tween);
     tween.to({ x: this.startX, y: this.startY}, 500, Phaser.Easing.Linear.None, true);
   }
