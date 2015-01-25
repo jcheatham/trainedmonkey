@@ -42,16 +42,11 @@
     var phaser = {};
 
     window.onload = function() {
-        window.gameSystem = { preload: preload, create: create, update: update, render: render };
-
-        phaser = new Phaser.Game(1000, 562, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render }, false, false);
 
         function preload () {
             game.loadAssets();
             background.loadAssets();
         }
-
-        
 
         function create () {
             game.init();
@@ -73,7 +68,22 @@
             }
         }
 
+        var main = { 
+            preload: preload, 
+            create: create, 
+            update: update, 
+            render: render 
+        };
+
+        phaser = new Phaser.Game(1000, 562, Phaser.AUTO, '', false, false);
+
+        phaser.state.add('main', main);
+        
+        phaser.state.start('main');
+
     };
+
+
 
     </script>
 
