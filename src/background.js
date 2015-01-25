@@ -24,19 +24,17 @@ var background = (function(){
 
   results.update = function(countDown) {
 
-    countDown = countDown || false;
-
     _.each(results.trees, function(tree){
       if (tree.x < -300) {
 
         tree.x = phaser._width * 7;
       }
-      if (countDown !== false) tree.x -= countDown;
+      if (countDown) tree.x -= countDown;
       else tree.x -= 0.5 * phaser.time.totalElapsedSeconds();
 
     });
     _.each(results.mountains, function(mountain){
-      if (countDown !== false) mountain.tilePosition.x -= countDown;
+      if (countDown) mountain.tilePosition.x -= countDown;
       else mountain.tilePosition.x -= 0.05 * phaser.time.totalElapsedSeconds();
     });
   };

@@ -4,14 +4,13 @@ var game = (function() {
     collisionHandlers: {}
   };
 
-  var countDown;
+  result.countDown = false;
 
   //lose function
-  var lose = function(){
+  result.lose = function(){
 
     setTimeout(function(){
-      clearInterval(slowTrain);
-      result.lose.y = 0;
+      result.loseImg.y = 0;
 
       setTimeout(function(){
         window.open("/", "_self");
@@ -21,14 +20,14 @@ var game = (function() {
   };
 
   //win function
-  var win = function(){
+  result.win = function(){
     countDown = 5;
     var slowTrain = setInterval(function(){
-      countDown--;
+      result.countDown--;
     }, 1000);
     setTimeout(function(){
       clearInterval(slowTrain);
-      result.lose.x = 0;
+      result.win.Img.y = 0;
       setTimeout(function(){
         window.open("/", "_self");
       }, 2000);
@@ -58,10 +57,10 @@ var game = (function() {
 
   result.init = function() {
 
-    result.lose = phaser.add.sprite(0, -1000, 'lose');
-    result.win = phaser.add.sprite(0, -1000, 'win');
-    result.lose.z = 1000;
-    result.win.z = 1000;
+    result.loseImg = phaser.add.sprite(0, -1000, 'lose');
+    result.winImg = phaser.add.sprite(0, -1000, 'win');
+    result.loseImg.z = 1000;
+    result.winImg.z = 1000;
 
 
     result.monkey = new Monkey();
@@ -76,8 +75,6 @@ var game = (function() {
                 500 + 1100 * trainNames.indexOf(name), phaser.world.centerY)
       );
     });
-
-
 
     result.music = phaser.add.audio('music');
     result.music.play();
@@ -105,8 +102,6 @@ var game = (function() {
 
     // The locked door
     items.door.closed = true;
-
-
 
     phaser.world.sort('z', Phaser.Group.SORT_ASCENDING);
 
@@ -137,6 +132,7 @@ var game = (function() {
 
 
   result.update = function() {
+    background.update(result.countDown);
 
     // if(phaser.input.keyboard.isDown(81)) {
     //   phaser.camera.x += 10;
@@ -167,8 +163,8 @@ var game = (function() {
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
 
-    if (result.time < -1) {
-      lose();
+    if (result.time < 0) {
+      result.lose();
     }
     // if(phaser.input.keyboard.isDown(39)) {
     //   result.monkeySprite.x -= 1;
