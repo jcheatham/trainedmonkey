@@ -37,7 +37,7 @@ var game = (function() {
 
     phaser.world.sort('z', Phaser.Group.SORT_ASCENDING);
 
-    result.currentItem = "empty";
+    result.currentItem = "key";
     result.canUseItem = true;
   }
 
@@ -63,12 +63,16 @@ var game = (function() {
     if (phaser.input.keyboard.isDown(32)) {
       if (result.canUseItem) {
         result.canUseItem = false;
-        var otherItem = "gum";
-        (items[result.currentItem].interactions[otherItem] || items[result.currentItem].interactions["default"])(otherItem);
+        result.interact("gum");
       }
     } else {
       result.canUseItem = true;
     }
+  }
+
+  result.interact = function(item) {
+    if (!items[result.currentItem]) { console.log("Unhandled currentItem "+result.currentItem); return; }
+    (items[result.currentItem].interactions[item] || items[result.currentItem].interactions["default"])(item);
   }
 
   result.dropItem = function(item) {
@@ -86,6 +90,8 @@ var game = (function() {
 
   result.acquireItem = function(item) {
     console.log("acquireItem "+item);
+    if (!result.currentItem == "empty") { console.log("WARNING: acquiring item while currentItem != empty"); }
+    result.currentItem = item;
     // set held item to item
   }
 

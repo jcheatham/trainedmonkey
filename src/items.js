@@ -7,6 +7,7 @@ var items = {
   empty: {
     interactions: {
       key: game.acquireItem,
+      gum: game.acquireItem,
       default: unsupportedInteraction,
     }
   },
@@ -35,6 +36,17 @@ var items = {
         console.log("unsupported key interaction");
         unsupportedInteraction();
       },
+    },
+  },
+
+  gum: {
+    interactions: {
+
+      key: function(item) {
+        console.log("this key has been completely ruined, what were you thinking?!");
+      },
+
+      default: unsupportedInteraction
     },
   },
 };
