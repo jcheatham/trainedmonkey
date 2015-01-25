@@ -25,7 +25,7 @@ var background = (function(){
   };
 
   results.update = function(breaks) {
-    if (results.speed > 90){
+    if (results.speed > 900){
       game.lose();
     }
 
