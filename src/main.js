@@ -156,7 +156,7 @@ var game = (function() {
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
 
-    if (result.time < 0) {
+    if (result.time < -60) {
       result.lose();
     }
     // if(phaser.input.keyboard.isDown(39)) {
