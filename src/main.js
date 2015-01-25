@@ -47,6 +47,7 @@ var game = (function() {
     // phaser.load.image('monkey', 'img/monkey.png');
     phaser.load.audio('monkey', 'audio/monkey1.wav');
     phaser.load.audio('music', 'audio/music.mp3');
+    phaser.load.image('steam', 'img/steam.png');
     // loadImage('item', 'img/item.png');
     // loadImage('train', 'img/train.png');
 
