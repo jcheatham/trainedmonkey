@@ -37,6 +37,7 @@
     var phaser = {};
 
     window.onload = function() {
+        window.gameSystem = { preload: preload, create: create, update: update, render: render };
 
         phaser = new Phaser.Game(1000, 562, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render }, false, false);
 
@@ -47,6 +48,8 @@
             game.loadAssets();
             background.loadAssets();
         }
+
+        
 
         function create () {
             game.init();

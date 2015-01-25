@@ -28,11 +28,11 @@ var background = (function(){
       if (tree.x < -300) {
         tree.x = phaser._width * 7;
       }
-      tree.x -= 20;
+      tree.x -= 0.5 * phaser.time.totalElapsedSeconds();
 
     });
     _.each(results.mountains, function(mountain){
-      mountain.tilePosition.x -= 0.1 * phaser.time.totalElapsedSeconds();
+      mountain.tilePosition.x -= 0.05 * phaser.time.totalElapsedSeconds();
     });
   };
 

@@ -4,11 +4,37 @@ var game = (function() {
     collisionHandlers: {}
   };
 
+  //lose function
+  var lose = function(){
+    //loseamations
+    setTimeout(function(){
+      result.lose.y = 0;
+      setTimeout(function(){
+        window.open("/");
+      }, 2000);
+    }, 5000);
+
+  };
+
+  //win function
+  var win = function(){
+    //winamations
+    setTimeout(function(){
+      result.lose.x = 0;
+      setTimeout(function(){
+        window.open("/");
+      }, 2000);
+    }, 5000);
+
+  };
+
   result.loadAssets = function () {
 
     Monkey.prototype.loadAssets();
     Car.prototype.loadAssets();
     // monkey.loadAssets();
+    phaser.load.image('lose', 'img/monkeywrench_lose.png');
+    phaser.load.image('win', 'img/monkeywrench_win.png');
 
 
     // phaser.load.image('monkey', 'img/monkey.png');
@@ -23,6 +49,13 @@ var game = (function() {
   }
 
   result.init = function() {
+
+    result.lose = phaser.add.sprite(0, -1000, 'lose');
+    result.win = phaser.add.sprite(0, -1000, 'win');
+    result.lose.z = 1000;
+    result.win.z = 1000;
+
+
     result.monkey = new Monkey();
 
     result.trains = [];
@@ -66,7 +99,6 @@ var game = (function() {
 
 
     phaser.world.sort('z', Phaser.Group.SORT_ASCENDING);
-    console.log('SORTING');
 
     result.currentItem = items.empty;
     result.canUseItem = true;
@@ -123,6 +155,9 @@ var game = (function() {
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
 
+    if (result.time < -1) {
+      lose();
+    }
     // if(phaser.input.keyboard.isDown(39)) {
     //   result.monkeySprite.x -= 1;
     // } else {
