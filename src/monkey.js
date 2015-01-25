@@ -33,6 +33,9 @@ var Monkey = function() {
 
   this.interactRect = new Phaser.Rectangle(-50,-20,90,60);
   this.canMove = true;
+
+  this.baseGroundHeight = 400;
+  this.groundHeight = this.baseGroundHeight;
 }
 
 Monkey.prototype.loadAssets = function() {
@@ -45,19 +48,27 @@ Monkey.prototype.loadAssets = function() {
 }
 
 Monkey.prototype.onGround = function() {
-  if(this.sprite.y > 299.9) {
+  if(this.sprite.y > this.groundHeight - 0.1) {
     return true;
   } else {
     return false;
   }
 }
 
-Monkey.prototype.update = function() {
+Monkey.prototype.update = function(game) {
+
+  this.sprite.x += game.trainMotionOffsetX
+  this.sprite.y += game.trainMotionOffsetY
+
+  this.groundHeight += game.trainMotionOffsetY;
+
 
   this.accelerationX = 0;
 
   if(this.onGround()) {
-    if(Math.abs(this.velocityX) > 0.3) {
+
+
+    if(Math.abs(this.velocityX) > 0.01) {
 
       var unitVelocity = this.velocityX / Math.abs(this.velocityX);
       this.direction = unitVelocity;
@@ -66,10 +77,11 @@ Monkey.prototype.update = function() {
 
     } else {
 
+
       if(this.velocityX > 0)  {
-        this.direction = 1;
-      } else {
         this.direction = -1;
+      } else {
+        this.direction = 1;
       }
 
     }
@@ -158,8 +170,8 @@ Monkey.prototype.attachItem = function(item) {
 }
 
 Monkey.prototype.simpleGroundCollisionHandler = function() {
-  if(this.sprite.y > 300) {
-    this.sprite.y = 300;
+  if(this.sprite.y > this.groundHeight) {
+    this.sprite.y = this.groundHeight;
     this.velocityY = 0;
   }
 }

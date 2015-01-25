@@ -48,7 +48,11 @@ var game = (function() {
 
   result.update = function() {
 
-    result.monkey.update();
+    result.trainMotionOffsetX = 0.3 * Math.sin(2 * phaser.time.totalElapsedSeconds());
+    result.trainMotionOffsetY = 0.1 * Math.sin(3 * phaser.time.totalElapsedSeconds());
+
+    result.monkey.update(result);
+    result.train.update(result);
 
     result.time -= 1.0 / 60;
     result.clock.text = result.time.toString();
