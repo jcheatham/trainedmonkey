@@ -44,9 +44,12 @@ game.interactions["fishbowl"]["cage"] = function() {
   items.fishbowl.interactRect = null;
   items.fishbowl.collisionRect = null;
 
-  items.fishbowl.sprite.y = 270;
-  // items.fishbowl.
-  
+  var tween = phaser.add.tween(items.fishbowl.sprite);
+  tween.onComplete.add(function(){
+    items.cat.jumpDown();
+  }, tween);
+  tween.to({x: 465, y: 270}, 100, Phaser.Easing.Quadratic.InOut, true, 0, 0, false);
+
   // var fishbowlDoneSprite = phaser.add.sprite(items.fishTable.sprite.x, items.fishTable.sprite.y, 'fishbowl');
   // fishbowlDoneSprite.anchor.setTo(0.5, 0.5);
   // fishbowlDoneSprite.z = 94;
