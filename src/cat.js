@@ -27,11 +27,8 @@ items["cat"] = {
 
     this.tailSprite.rotation = 0.5 * Math.sin(5 * phaser.time.totalElapsedSeconds())
 
-    this.sprite.x += game.trainMotionOffsetX;
-    this.sprite.y += game.trainMotionOffsetY;
-
-    this.tailSprite.x += game.trainMotionOffsetX;
-    this.tailSprite.y += game.trainMotionOffsetY;
+    game.followTrain(this.sprite);
+    game.followTrain(this.tailSprite);
 
     var headTargetX = this.sprite.x + 0;
     var headTargetY = this.sprite.y - 30;

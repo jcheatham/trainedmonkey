@@ -12,7 +12,8 @@ var game = (function() {
 
 
     // phaser.load.image('monkey', 'img/monkey.png');
-    phaser.load.audio('jump', 'audio/train0.wav');
+    // phaser.load.audio('jump', 'audio/train0.wav');
+    phaser.load.audio('music', 'audio/music.mp3');
     // loadImage('item', 'img/item.png');
     // loadImage('train', 'img/train.png');
 
@@ -37,15 +38,14 @@ var game = (function() {
 
 
 
+    result.music = phaser.add.audio('music');
+    result.music.play();
+
 
     background.init();
 
-    // result.trainSpritePlaceholder =
-
     result.time = 60;
     result.clock = phaser.add.text(phaser.world.centerX, phaser.world.centerY + 200, result.time.toString());
-
-    result.jumpSound = phaser.add.audio('jump');
 
     //phaser.camera.deadzone = new Phaser.Rectangle(200,380,1,1);
     phaser.world.setBounds(0,0,200000,1000);
@@ -53,7 +53,12 @@ var game = (function() {
 
     _.each(items, function(item){
       if (item.init) item.init(phaser);
+      item.attachedToTrain = true;
+
     });
+
+
+
     phaser.world.sort('z', Phaser.Group.SORT_ASCENDING);
     console.log('SORTING');
 
@@ -91,11 +96,17 @@ var game = (function() {
 
     result.handleDoors();
 
-
+    
 
 
     result.trainMotionOffsetX = 0.3 * Math.sin(2 * phaser.time.totalElapsedSeconds());
     result.trainMotionOffsetY = 0.1 * Math.sin(3 * phaser.time.totalElapsedSeconds());
+
+    _.each(items, function(item) {
+      if(item.attachedToTrain) {
+        game.followTrain(item);  
+      }
+    })
 
     result.monkey.update(result);
     
@@ -158,6 +169,7 @@ var game = (function() {
 
   result.dropItem = function() {
     console.log("dropItem");
+    result.currentItem.attachedToTrain = true;
     result.currentItem = items.empty;
     result.monkey.attachItem(result.currentItem);
   }
@@ -176,7 +188,16 @@ var game = (function() {
     //if (result.currentItem != items.empty) { console.log("WARNING: acquiring item while currentItem != empty"); }
     result.currentItem = items[item];
     result.monkey.attachItem(result.currentItem);
+    item.attachedToTrain = false;
   }
+
+
+  result.followTrain = function(item) {
+    if(item.sprite === undefined) return;    
+    item.sprite.x += game.trainMotionOffsetX;
+    item.sprite.y += game.trainMotionOffsetY;
+  }
+
 
   return result;
 
