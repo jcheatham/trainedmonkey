@@ -25,7 +25,7 @@ var background = (function(){
   };
 
   results.update = function(breaks) {
-    if (results.speed > 30){
+    if (results.speed > 90){
       game.lose();
     }
 
@@ -40,7 +40,7 @@ var background = (function(){
 
         tree.x = phaser._width * 7;
       }
-      tree.x -= Math.floor(results.speed/2);
+      tree.x -= results.speed;
 
     });
     _.each(results.mountains, function(mountain){
