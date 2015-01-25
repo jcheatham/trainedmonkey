@@ -14,7 +14,7 @@ var background = (function(){
   };
 
   SpriteTrack.prototype.add = function(sprite){
-    sprite.z = -100 //(- this.distance);
+    sprite.z = (- this.distance);
     this.feed.push(sprite);
     this.pixelLength += sprite._width;
     return this;
@@ -23,10 +23,10 @@ var background = (function(){
   SpriteTrack.prototype.iterate = function(){
     var _this = this;
     _.each(this.feed, function(sprite){
-      if (sprite.x === phaser._width) {
-        sprite.x = (sprite._width - _this.pixelLength);
+      if (sprite.x === -sprite._width) {
+        sprite.x = _this.pixelLength - sprite._width;
       }
-      sprite.x += _this.speed;
+      sprite.x -= _this.speed;
     });
   };
 
