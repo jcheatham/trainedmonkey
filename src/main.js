@@ -10,7 +10,7 @@ var game = (function() {
     setTimeout(function(){
       result.lose.y = 0;
       setTimeout(function(){
-        window.open("/");
+        window.open("/", "_self");
       }, 2000);
     }, 5000);
 
@@ -22,7 +22,7 @@ var game = (function() {
     setTimeout(function(){
       result.lose.x = 0;
       setTimeout(function(){
-        window.open("/");
+        window.open("/", "_self");
       }, 2000);
     }, 5000);
 
