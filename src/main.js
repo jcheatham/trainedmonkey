@@ -40,7 +40,7 @@ var game = (function() {
 
     result.music = phaser.add.audio('music');
     result.music.play();
-    
+
     result.sounds = {}
     result.sounds.monkey = phaser.add.audio('monkey');
 
@@ -62,7 +62,7 @@ var game = (function() {
 
     });
 
-    // The locked door 
+    // The locked door
     items.door.closed = true;
 
 
@@ -112,7 +112,7 @@ var game = (function() {
 
     _.each(items, function(item) {
       if(item.attachedToTrain) {
-        game.followTrain(item);  
+        game.followTrain(item);
       } else if(item.falling){
         game.applyGravity(item);
       }
@@ -153,12 +153,12 @@ var game = (function() {
       }
 
       if (collides && wantInteraction) {
-        wantInteraction = false;
         if (!result.interactions[result.currentItem.name] || !result.interactions[result.currentItem.name][item.name]) {
           console.log("FAILURE", result.currentItem.name, item.name);
           result.monkey.confuse();
           return;
         }
+        wantInteraction = false;
         result.interactions[result.currentItem.name][item.name]();
       }
     });
@@ -168,27 +168,23 @@ var game = (function() {
     }
   }
 
-  result.dropItem = function() {
-    console.log("dropItem");
-    result.currentItem.falling = true;
-    result.currentItem.velocityY = 0.0;
-    result.currentItem.attachedToTrain = false;
+  result.discardItem = function() {
+    if (result.currentItem == items.empty) { return; }
+    result.dropItem(result.currentItem);
     result.currentItem = items.empty;
     result.monkey.attachItem(result.currentItem);
   }
 
-  result.removeItem = function(item) {
-    console.log("removeItem ",item);
-  }
-
-  result.addItem = function(item) {
-    console.log("addItem ",item);
+  result.dropItem = function(item) {
+    item.falling = true;
+    item.velocityY = 0.0;
+    item.attachedToTrain = false;
   }
 
   result.acquireItem = function(item) {
     console.log("acquireItem ",item);
     if (!items[item]) { console.log("unknown item: ",item); return; }
-    //if (result.currentItem != items.empty) { console.log("WARNING: acquiring item while currentItem != empty"); }
+    result.discardItem();
     result.currentItem = items[item];
     result.monkey.attachItem(result.currentItem);
     item.attachedToTrain = false;

@@ -20,5 +20,5 @@ game.interactions["empty"]["gumball"] = function(){
 };
 
 game.interactions["gumball"] = {};
-game.interactions["gumball"]["empty"] = function(){ game.dropItem(); };
+game.interactions["gumball"]["empty"] = function(){ game.discardItem(); };
 game.interactions["gumball"]["gumballMachine"] = function(){ console.log("there's no putting the genie back in the bottle"); };

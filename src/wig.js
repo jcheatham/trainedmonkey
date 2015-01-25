@@ -22,7 +22,7 @@ items["wig"] = {
 game.interactions["empty"]["wig"] = function(){ game.acquireItem("wig"); };
 
 game.interactions["wig"] = {};
-game.interactions["wig"]["empty"] = function(){ game.dropItem(); };
+game.interactions["wig"]["empty"] = function(){ game.discardItem(); };
 game.interactions["wig"]["wrench"] = function(){ game.acquireItem("wrench"); };
 game.interactions["wig"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
 game.interactions["wig"]["key"] = function(){ game.acquireItem("key"); };

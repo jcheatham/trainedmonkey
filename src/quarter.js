@@ -15,14 +15,14 @@ items["quarter"] = {
 game.interactions["empty"]["quarter"] = function(){ game.acquireItem("quarter"); };
 
 game.interactions["quarter"] = {};
-game.interactions["quarter"]["empty"] = function(){ game.dropItem(); };
+game.interactions["quarter"]["empty"] = function(){ game.discardItem(); };
 game.interactions["quarter"]["wrench"] = function(){ game.acquireItem("wrench"); };
 game.interactions["quarter"]["fishbowl"] = function(){ game.acquireItem("fishbowl"); };
 game.interactions["quarter"]["key"] = function(){ game.acquireItem("key"); };
 game.interactions["quarter"]["wig"] = function(){ game.acquireItem("wig"); };
 
 game.interactions["quarter"]["gumballMachine"] = function(){
-  game.dropItem();
+  game.discardItem();
   items.quarter.sprite.y = 10000;
   items.gumballMachine.purchase();
 };

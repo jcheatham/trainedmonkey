@@ -14,6 +14,9 @@ items["gumballMachine"] = {
     this.interactRect = null;
     this.collisionRect = null;
     items.gumball.sprite.visible = true;
+    items.gumball.falling = true;
+    items.gumball.velocityY = 0.0;
+    items.gumball.attachedToTrain = false;
   }
 };
 
