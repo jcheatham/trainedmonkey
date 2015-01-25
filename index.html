@@ -14,6 +14,23 @@
     <script src="src/monkey.js"></script>
     <script src="src/items.js"></script>
 
+    <script src="src/bird.js"></script>
+    <script src="src/birdnest.js"></script>
+    <script src="src/cat.js"></script>
+    <script src="src/engineroomlever.js"></script>
+    <script src="src/engineroomsteam.js"></script>
+    <script src="src/fishbowl.js"></script>
+    <script src="src/gumballmachine.js"></script>
+    <script src="src/gumball.js"></script>
+    <script src="src/hatrack.js"></script>
+    <script src="src/key.js"></script>
+    <script src="src/quarter.js"></script>
+    <script src="src/steampressurevalve.js"></script>
+    <script src="src/steamswitch.js"></script>
+    <script src="src/wig.js"></script>
+    <script src="src/wrench.js"></script>
+    <script src="src/portal1.js"></script>
+
     <script type="text/javascript">
 
     var phaser = {};
@@ -45,13 +62,9 @@
             phaser.debug.spriteCoords(items.key.sprite, 400, 500);
             // phaser.debug.text(game.monkey.velocityX.toString(), 32, 300);
 
-            // var monkeyRect = new Phaser.Rectangle(game.monkey.interactRect.x + game.monkey.sprite.x,
-            //   game.monkey.interactRect.y + game.monkey.sprite.y, game.monkey.interactRect.width, game.monkey.interactRect.height);
-            // phaser.debug.geom(monkeyRect);
-
-            // var itemRect = new Phaser.Rectangle(items.key.interactRect.x + items.key.sprite.x,
-            //   items.key.interactRect.y + items.key.sprite.y, items.key.interactRect.width, items.key.interactRect.height);
-            // phaser.debug.geom(itemRect);
+            if (game.monkey.collisionRect) { phaser.debug.geom(game.monkey.collisionRect); }
+            if (items.key.collisionRect) { phaser.debug.geom(items.key.collisionRect); }
+            if (items["portal1"].collisionRect) { phaser.debug.geom(items["portal1"].collisionRect); }
         }
 
     };
