@@ -116,7 +116,9 @@ Monkey.prototype.update = function(game) {
   this.sprite.y += this.velocityY;
   if (this.flying) {
     if (this.sprite.x != 7100) { phaser.camera.x = 6600; }
+    this.sprite.setTexture(PIXI.TextureCache["monkey.jump"])
     this.sprite.x = 7100;
+    this.sprite.y = 300 + 100 * Math.sin(phaser.time.totalElapsedSeconds());
   } else {
     if (this.sprite.x < 100) this.sprite.x = 100;
     if (this.sprite.x > 6200) this.sprite.x = 6200;
@@ -213,19 +215,17 @@ Monkey.prototype.handleMotionInput = function() {
 
   // Jump button - up
   if(phaser.input.keyboard.isDown(38)) {
-    if(this.onGround() && this.hasJump) {
-      this.jump();
-    }
-  }
-  else if(this.onGround()) {
+    this.jump();
+  } else if(this.onGround()) {
     this.hasJump = true;
   }
 
 }
 
 Monkey.prototype.jump = function() {
-  this.velocityY = -10.0 + -10.0 * Math.abs(this.velocityX);
+  if (!this.hasJump) { return; }
   this.hasJump = false;
+  this.velocityY = -10.0 + -10.0 * Math.abs(this.velocityX);
 }
 
 Monkey.prototype.confuse = function() {
