@@ -45,6 +45,7 @@ Monkey.prototype.loadAssets = function() {
   phaser.load.image('monkey.walk.3', 'img/monkey_walk_3.png');
   phaser.load.image('monkey.head', 'img/monkey_head.png');
   phaser.load.image('monkey.jump', 'img/monkey_jump.png');
+  phaser.load.image('question_mark', 'img/question_mark.png');
 }
 
 Monkey.prototype.onGround = function() {
@@ -161,6 +162,11 @@ Monkey.prototype.update = function(game) {
     this.sprite.setTexture(PIXI.TextureCache["monkey.jump"])
   }
 
+  if (this.confusionEmitter) {
+    this.confusionEmitter.x = this.headSprite.x;
+    this.confusionEmitter.y = this.headSprite.y;
+  }
+
   this.collisionRect = new Phaser.Rectangle(this.interactRect.x + this.sprite.x,
       this.interactRect.y + this.sprite.y,
       this.interactRect.width,
@@ -210,4 +216,20 @@ Monkey.prototype.jump = function() {
   this.hasJump = false;
 }
 
+Monkey.prototype.confuse = function() {
+  var e = phaser.add.emitter(this.headSprite.x, this.headSprite.y, 10);
+  e.width = 75;
+  e.makeParticles('question_mark');
+  e.minParticleSpeed.set(0, -400);
+  e.maxParticleSpeed.set(0, -500);
+  e.setRotation(0, 0);
+  //e.setAlpha(0, 1, 0.5);
+  e.setScale(0.5, 0.5, 1, 1);
+  e.gravity = 1000;
+  //	false means don't explode all the sprites at once, but instead release at a rate of one particle per 100ms
+  //	The 5000 value is the lifespan of each particle before it's killed
+  e.start(false, 600, 20, 10);
+
+  this.confusionEmitter = e;
+}
 

@@ -29,4 +29,7 @@ game.interactions["key"]["empty"] = function(){
 game.interactions["key"]["gumball"] = function(){
   game.acquireItem("gumball");
 };
+game.interactions["key"]["cat"] = function(){
+  game.monkey.confuse();
+};
 
