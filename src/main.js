@@ -5,6 +5,8 @@ var game = (function() {
   };
 
   result.lose = function(){
+    game.sounds.crash.explosion.play('', 0, 1);
+    game.sounds.crash.metallic.play('', 0, 1);
     result.loseImg.y = phaser.camera.y;
     result.loseImg.x = phaser.camera.x;
     result.loseImg.z = 1000;
