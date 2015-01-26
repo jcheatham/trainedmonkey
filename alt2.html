@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="//getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="//getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <style>
+      #game {
+        position: absolute;
+
+        right: 0;
+        left: 0;
+        margin-right: auto;
+        margin-left: auto;
+
+        height: 562px;
+        width: 1000px;
+
+        border: 2px solid black;
+        border-radius: 2%;
+      }
+
+      #text-content {
+        margin-top: 620px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Project name</h3>
+      </div>
+
+      <div id="game"></div>
+
+      <div id="text-content" class="row marketing">
+        <div class="col-lg-6">
+          <h4>Subheading</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+          <h4>Subheading</h4>
+          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+          <h4>Subheading</h4>
+          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4>Subheading</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+          <h4>Subheading</h4>
+          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+          <h4>Subheading</h4>
+          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <script src="src/main.js"></script>
+    <script src="src/car.js"></script>
+    <script src="src/background.js"></script>
+    <script src="src/monkey.js"></script>
+    <script src="src/items.js"></script>
+
+    <script src="src/activationlever.js"></script>
+    <script src="src/birdnest.js"></script>
+    <script src="src/cat.js"></script>
+    <script src="src/boiler.js"></script>
+    <script src="src/fishbowl.js"></script>
+    <script src="src/gumballmachine.js"></script>
+    <script src="src/gumball.js"></script>
+    <script src="src/hatrack.js"></script>
+    <script src="src/key.js"></script>
+    <script src="src/owl.js"></script>
+    <script src="src/quarter.js"></script>
+    <script src="src/steamvalve.js"></script>
+    <script src="src/steamswitch.js"></script>
+    <script src="src/wig.js"></script>
+    <script src="src/wrench.js"></script>
+    <script src="src/portal1.js"></script>
+    <script src="src/door.js"></script>
+    <script src="src/cage.js"></script>
+
+    <script type="text/javascript">
+
+    // var debug = true;
+    var debug = false;
+
+
+    var phaser = {};
+
+    window.onload = function() {
+
+        function preload () {
+            game.loadAssets();
+            background.loadAssets();
+        }
+
+        function create () {
+            game.init();
+        }
+
+        function update() {
+            game.update();
+            // background.update();
+        }
+
+        function render() {
+            if(debug) {
+                phaser.debug.cameraInfo(phaser.camera, 32, 32);
+                phaser.debug.spriteCoords(game.monkey.sprite, 32, 500);
+                phaser.debug.text(game.monkey.velocityX.toString(), 32, 300);
+
+                if (game.monkey.collisionRect) { phaser.debug.geom(game.monkey.collisionRect); }
+                _.each(items, function(item) { if (item.collisionRect) { phaser.debug.geom(item.collisionRect); } });
+            }
+        }
+
+        var main = { 
+            preload: preload, 
+            create: create, 
+            update: update, 
+            render: render 
+        };
+
+        phaser = new Phaser.Game(1000, 562, Phaser.AUTO, 'game', main, false, false);
+
+        phaser.state.add('main', main);
+        console.log(phaser);
+        phaser.state.start('main');
+
+    };
+    </script>
+  </body>
+</html>
