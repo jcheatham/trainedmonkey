@@ -50,6 +50,7 @@ items["owl"] = {
 
   },
   flyToWig: function() {
+    game.sounds.owl.squawk.play();
     game.monkey.canMove = false;
     items.wig.interactRect = null;
     items.wig.collisionRect = null;

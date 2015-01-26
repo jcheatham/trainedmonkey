@@ -20,6 +20,7 @@ items["steamValve"] = {
     this.emitter = e;
   },
   steam: function(on) {
+    game.sounds.steam.rumble.play();
     this.emitter.on = on;
   }
 };
