@@ -4,13 +4,10 @@ var game = (function() {
     collisionHandlers: {}
   };
 
-  result.breaks = false;
-
   result.lose = function(){
+    result.loseImg.z = 1000;
     result.loseImg.y = 0;
-    setTimeout(function(){
-      window.open("/", "_self");
-    }, 5000);
+    setTimeout(function(){ window.open("/", "_self"); }, 5000);
   };
 
   //win function
@@ -84,10 +81,11 @@ var game = (function() {
   result.init = function() {
 
     result.loseImg = phaser.add.sprite(0, -1000, 'lose');
-    result.winImg = phaser.add.sprite(0, -1000, 'win');
-    result.loseImg.z = 5000;
-    result.winImg.z = 5000;
+    result.loseImg.z = 1000;
+    result.loseImg.anchor.setTo(0,0);
 
+    result.winImg = phaser.add.sprite(0, -1000, 'win');
+    result.winImg.z = 1000;
 
     result.monkey = new Monkey();
 
@@ -192,7 +190,7 @@ var game = (function() {
 
 
   result.update = function() {
-    background.update(result.breaks);
+    background.update();
 
     // if(phaser.input.keyboard.isDown(81)) {
     //   phaser.camera.x += 10;
