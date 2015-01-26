@@ -15,6 +15,7 @@ var game = (function() {
 
   //win function
   result.win = function(){
+    game.sounds.game.win.play('', 0, 1);
     var e = phaser.add.emitter(7000, -10, 200);
     e.z = 1000;
     e.width = 1000;
@@ -63,13 +64,13 @@ var game = (function() {
     phaser.load.audio('owl.chirp1', 'audio/owl_tawny_owl_chirp.mp3');
     phaser.load.audio('owl.chirp2', 'audio/owl_unknown_chirp_interior.mp3');
 
-    phaser.load.audio('cat.growl', 'audio/catgrowls.wav');
+    // phaser.load.agame'win', 'audio/catgrowls.wav');
     phaser.load.audio('cat.meow', 'audio/cat-meow3.wav');
 
     phaser.load.audio('gumball.carpet', 'audio/gumball_drop_on_carpet_floor.mp3');
     phaser.load.audio('gumball.marble', 'audio/gumball_marble-drop.mp3');
 
-    phaser.load.audio('game.win', 'audio/gumball_drop_on_carpet_floor.mp3');
+    phaser.load.audio('game.win', 'audio/win.mp3');
     phaser.load.audio('game.lose', 'audio/gumball_marble-drop.mp3');
 
 
