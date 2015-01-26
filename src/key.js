@@ -21,6 +21,7 @@ game.interactions["key"]["wig"] = function(){ game.acquireItem("wig"); };
 game.interactions["key"]["quarter"] = function(){ game.acquireItem("quarter"); };
 
 game.interactions["key"]["door"] = function() {
+  game.sounds.door.play();
   items.door.closed = false;
   items.door.sprite.visible = false;
   game.discardItem();
