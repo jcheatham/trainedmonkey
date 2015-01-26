@@ -5,8 +5,9 @@ var game = (function() {
   };
 
   result.lose = function(){
+    result.loseImg.y = phaser.camera.y;
+    result.loseImg.x = phaser.camera.x;
     result.loseImg.z = 1000;
-    result.loseImg.y = 0;
     setTimeout(function(){ window.open("/", "_self"); }, 5000);
   };
 
@@ -43,19 +44,19 @@ var game = (function() {
     // phaser.load.image('monkey', 'img/monkey.png');
 
     phaser.load.audio('music', 'audio/music.mp3');
-    
+
     phaser.load.audio('monkey', 'audio/41382__sandyrb__fake-monkey-chatter-001.wav');
-    
+
     phaser.load.audio('train.loop', 'audio/track_noise_from_on_board_train.mp3');
     phaser.load.audio('train.engineroom', 'audio/186940__readeonly__engine3-idle-loop.wav');
     phaser.load.audio('train.win', 'audio/train-come_to_stop.mp3');
 
     phaser.load.audio('crash.metallic', 'audio/crash_comic_hit_metallic_crash.mp3');
     phaser.load.audio('crash.explosion', 'audio/crash_iwiploppenisse__explosion.mp3');
-    
+
     phaser.load.audio('steam.blast', 'audio/air_burst_pneumatic_hose_discharge.mp3');
     phaser.load.audio('steam.rumble', 'audio/air_steam-hiss.wav');
-    
+
     phaser.load.audio('owl.squawk', 'audio/Owl_european_eagle_owl_squawk_001.mp3');
     phaser.load.audio('owl.chirp1', 'audio/owl_tawny_owl_chirp.mp3');
     phaser.load.audio('owl.chirp2', 'audio/owl_unknown_chirp_interior.mp3');
@@ -69,7 +70,7 @@ var game = (function() {
     phaser.load.audio('game.win', 'audio/gumball_drop_on_carpet_floor.mp3');
     phaser.load.audio('game.lose', 'audio/gumball_marble-drop.mp3');
 
-    
+
     // loadImage('item', 'img/item.png');
     // loadImage('train', 'img/train.png');
 
@@ -105,29 +106,29 @@ var game = (function() {
 
     result.sounds = {}
     result.sounds.monkey = phaser.add.audio('monkey');
-    
+
     result.sounds.train = {};
     result.sounds.train.loop = phaser.add.audio('train.loop');
     result.sounds.train.engineroom = phaser.add.audio('train.engineroom');
     result.sounds.train.win = phaser.add.audio('train.win');
-    
+
     result.sounds.crash = {};
     result.sounds.crash.metallic = phaser.add.audio('crash.metallic');
     result.sounds.crash.explosion = phaser.add.audio('crash.explosion');
-    
+
     result.sounds.steam = {};
     result.sounds.steam.blast = phaser.add.audio('steam.blast');
     result.sounds.steam.rumble = phaser.add.audio('steam.rumble');
-    
+
     result.sounds.owl = {};
     result.sounds.owl.squawk = phaser.add.audio('owl.squawk');
     result.sounds.owl.chirp1 = phaser.add.audio('owl.chirp1');
     result.sounds.owl.chirp2 = phaser.add.audio('owl.chirp2');
-    
+
     result.sounds.cat = {};
     result.sounds.cat.growl = phaser.add.audio('cat.growl');
     result.sounds.cat.meow = phaser.add.audio('cat.meow');
-    
+
     result.sounds.gumball = {};
     result.sounds.gumball.carpet = phaser.add.audio('gumball.carpet');
     result.sounds.gumball.marble = phaser.add.audio('gumball.marble');
