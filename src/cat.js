@@ -58,6 +58,7 @@ items["cat"] = {
 
   },
   jumpDown: function() {
+    game.sounds.cat.growl.play('', 0, 1);
     this.active = false;
     this.interactRect = null;
     this.collisionRect = null;

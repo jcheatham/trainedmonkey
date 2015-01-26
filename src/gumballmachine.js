@@ -11,6 +11,7 @@ items["gumballMachine"] = {
     this.interactRect = new Phaser.Rectangle(-45,-20,90,160);
   },
   purchase: function() {
+    game.sounds.gumball.marble.play();
     this.interactRect = null;
     this.collisionRect = null;
     items.gumball.sprite.visible = true;
