@@ -53,6 +53,7 @@ var game = (function() {
     phaser.load.audio('train.loop', 'audio/track_noise_from_on_board_train.mp3');
     phaser.load.audio('train.engineroom', 'audio/186940__readeonly__engine3-idle-loop.wav');
     phaser.load.audio('train.win', 'audio/train-come_to_stop.mp3');
+    phaser.load.audio('wheel', 'audio/wheel_squeaky-wheel-loop-3.mp3');
 
     phaser.load.audio('crash.metallic', 'audio/crash_comic_hit_metallic_crash.mp3');
     phaser.load.audio('crash.explosion', 'audio/crash_iwiploppenisse__explosion.mp3');
@@ -72,6 +73,7 @@ var game = (function() {
 
     phaser.load.audio('game.win', 'audio/win.mp3');
     phaser.load.audio('game.lose', 'audio/gumball_marble-drop.mp3');
+    phaser.load.audio('door', 'audio/door.mp3');
 
 
     // loadImage('item', 'img/item.png');
@@ -83,6 +85,12 @@ var game = (function() {
   };
 
   result.init = function() {
+
+    phaser.input.keyboard.addKeyCapture(32);
+    phaser.input.keyboard.addKeyCapture(39);
+    phaser.input.keyboard.addKeyCapture(37);
+    phaser.input.keyboard.addKeyCapture(38);
+    phaser.input.keyboard.addKeyCapture(40);
 
     result.loseImg = phaser.add.sprite(0, -1000, 'lose');
     result.loseImg.z = 1000;
@@ -114,6 +122,9 @@ var game = (function() {
     result.sounds.train.loop = phaser.add.audio('train.loop');
     result.sounds.train.engineroom = phaser.add.audio('train.engineroom');
     result.sounds.train.win = phaser.add.audio('train.win');
+
+    result.sounds.wheel = phaser.add.audio('wheel');
+    result.sounds.door = phaser.add.audio('door');
 
     result.sounds.crash = {};
     result.sounds.crash.metallic = phaser.add.audio('crash.metallic');

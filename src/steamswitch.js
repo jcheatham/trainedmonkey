@@ -12,6 +12,7 @@ items["steamSwitch"] = {
   },
   turn: function() {
     if (this.steamOn) return;
+    game.sounds.wheel.play();
     game.monkey.canMove = false;
     var valveTween = phaser.add.tween(items["steamSwitch"].sprite);
     valveTween.onComplete.add(function(){
