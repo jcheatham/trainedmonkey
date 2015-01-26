@@ -1,10 +1,6 @@
 var background = (function(){
 
-
-
   var results = {};
-
-  results.speed = 0;
 
   results.loadAssets = function() {
     phaser.load.image('mountain', 'img/bg_1.png');
@@ -13,7 +9,7 @@ var background = (function(){
   };
 
   results.init = function() {
-    
+
     results.mountains = [];
     for(var i = 0; i < 5; i++){
       results.mountains.push(phaser.add.tileSprite(i*1912, 0, 1912, 600, 'mountain'));
@@ -27,27 +23,21 @@ var background = (function(){
   };
 
   results.update = function(breaks) {
-    if (results.speed > 90){
-      game.lose();
-    }
-
-    if (breaks) {
-      if (results.speed > 0) results.speed--;
-    } else {
-      results.speed = phaser.time.totalElapsedSeconds();
-    }
+    var speed = Math.min(300, phaser.time.totalElapsedSeconds());
 
     _.each(results.trees, function(tree){
       if (tree.x < -300) {
-
-        tree.x = phaser._width * 7;
+        tree.x = 8000;
+        if (game.monkey.flying) {
+          tree.y = Math.floor(Math.random()*200+300);
+        } else {
+          tree.y = Math.floor(Math.random()*200);
+        }
       }
-      tree.x -= results.speed;
-
+      tree.x -= speed;
     });
     _.each(results.mountains, function(mountain){
-      mountain.tilePosition.x -= Math.floor(results.speed/10);
-      if (results.speed/10 < 0) game.win(); 
+      mountain.tilePosition.x -= Math.floor(speed/10);
     });
   };
 
