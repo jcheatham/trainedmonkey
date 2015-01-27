@@ -1,12 +1,121 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Monkey Wrench 2: Trained Monkey</title>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
-        <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
-    </head>
-    <body>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Trained Monkey">
+    <meta name="author" content="The Men with Yellow Hats">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Trained Monkey</title>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/2.2.2/phaser.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/2.2.2/phaser.map"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link href="//getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+    <style>
+      #game {
+        position: absolute;
+
+        right: 0;
+        left: 0;
+        margin-right: auto;
+        margin-left: auto;
+
+        height: 560px;
+        width: 998px;
+
+        border-radius: 5%;
+        overflow: hidden;
+      }
+
+      #text-content {
+        margin-top: 600px;
+        text-align: center;
+      }
+
+      .col-team {
+        text-align: left;
+        width:50%;
+        float: left;
+      }
+      .instructions {
+        font-size: 1.25em
+      }
+
+      #loading {
+        color: #fffff3;
+        font-size: 1.3em;
+        position: absolute;
+        top: 200px;
+        left: 400px;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#game">Game</a></li>
+            <li role="presentation"><a href="#team">Team</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">MONKEY WRENCH 2: TRAINED MONKEY</h3>
+      </div>
+      <div id="game"><span id="loading"><img src="img/loading.gif" alt="loading"> me load you long time...</span></div>
+
+        <div id="text-content">
+           <p class="instructions">Use the <strong>arrow keys</strong> to scamper and leap. Use <strong>spacebar</strong> to molest the environment with your little monkey tail. Stop the train before it reaches TERMINAL velocity!</p>
+        <hr>
+        <h3 id="team">The 2015 Global Game Jam<br>"Men with Yellow Hats" Team</h3>
+
+        <div class="row marketing">
+          <div class="col-team">
+
+            <h4>Anastasi Bakolias</h4>
+            <p>recovering grad student. Enthusiastic programmer. <a href="http://spasiu.github.io/">http://spasiu.github.io/</a></p>
+
+            <h4>Jonathan Cheatham</h4>
+            <p>coder by day, game coder by night... basically always coding. <a href="http://www.cryptoxiph.com/">http://www.cryptoxiph.com/</a></p>
+
+            <h4>Everett Coe</h4>
+            <p>3D environmental and hard surface modeling artist. Undiscovered pixelart genius. <a href="http://everettcoe.prosite.com/">http://everettcoe.prosite.com/</a></p>
+
+            <h4>Troy Gardner</h4>
+            <p>AKA the sprite assassin. 2D artist, 3D artist, professional game artist. <a href="http://globalgamejam.org/users/troy-gardner">http://globalgamejam.org/users/troy-gardner</a></p>
+          </div>
+
+          <div class="col-team">
+            <h4>Steve Goldsmith</h4>
+            <p>full stack developer, educator and entrepraneur. <a href="https://www.linkedin.com/in/goldsmsj">https://www.linkedin.com/in/goldsmsj</a></p>
+
+            <h4>Marcus Montgomery</h4>
+            <p>Ronin game designer. Fearless leader. <a href="http://www.sleepy-genius.com/">http://www.sleepy-genius.com/</a></p>
+
+            <h4>SKultra</h4>
+            <p>audio engineer, composer, international man of mystery.</p>
+
+            <h4>Troy Turriate</h4>
+            <p>makes music out of everything. <a href="http://troy.turriate.com/">http://troy.turriate.com/</a></p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; noman</p>
+      </footer>
+
+    </div> <!-- /container -->
+
 
     <script src="src/main.js"></script>
     <script src="src/car.js"></script>
@@ -41,6 +150,10 @@
 
     var phaser = {};
 
+    window.gameStateLoaded = function(){
+        document.getElementById('loading');
+    }
+
     window.onload = function() {
 
         function preload () {
@@ -50,6 +163,10 @@
 
         function create () {
             game.init();
+            var element = document.getElementById("loading");
+            while (element.firstChild) {
+              element.removeChild(element.firstChild);
+            }
         }
 
         function update() {
@@ -75,17 +192,12 @@
             render: render 
         };
 
-        phaser = new Phaser.Game(1000, 562, Phaser.AUTO, '', main, false, false);
+        phaser = new Phaser.Game(1000, 562, Phaser.AUTO, 'game', main, false, false);
 
         phaser.state.add('main', main);
-        console.log(phaser);
         phaser.state.start('main');
 
     };
-
-
-
     </script>
-
-    </body>
+  </body>
 </html>
