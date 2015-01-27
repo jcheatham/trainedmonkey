@@ -142,8 +142,6 @@
     <script src="src/door.js"></script>
     <script src="src/cage.js"></script>
 
-    <div id="loading_text" style="position:absolute;top:250px;left:300px;font-size:72px;color:yellow;text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">LOADING...</div>
-
     <script type="text/javascript">
 
     // var debug = true;
@@ -151,10 +149,6 @@
 
 
     var phaser = {};
-
-    window.gameStateLoaded = function(){
-        document.getElementById('loading');
-    }
 
     window.onload = function() {
 
@@ -164,7 +158,6 @@
         }
 
         function create () {
-            document.getElementById('loading_text').style.display = "none";
             game.init();
             var element = document.getElementById("loading");
             while (element.firstChild) {
